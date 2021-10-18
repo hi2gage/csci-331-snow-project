@@ -16,4 +16,4 @@ COPY . /server
 # Expose the port and start the application
 EXPOSE $PORT
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]
