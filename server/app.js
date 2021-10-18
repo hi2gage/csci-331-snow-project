@@ -4,7 +4,7 @@ var app = express()
 
 //Define request response in root URL (/)
 app.get('/', function (req, res) {
-  res.send('This is exactly what i like to Ok!')
+  res.send('I have fixed the git!')
 })
 
 //Launch listening server on port 8080
