@@ -4,7 +4,11 @@ var app = express()
 
 //Define request response in root URL (/)
 app.get('/', function (req, res) {
+<<<<<<< HEAD
   res.send('Do you like me an Then')
+=======
+  res.send('Isnt this great DAB DAB DAB THIS IS A TEST OF THE BRANCH')
+>>>>>>> testing_branches
 })
 
 //Launch listening server on port 8080
