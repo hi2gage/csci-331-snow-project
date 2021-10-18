@@ -4,7 +4,8 @@ FROM node:latest
 WORKDIR /server
 
 # Install app dependencies
-COPY package*.json ./
+COPY package*.json ./server
+
 
 
 RUN npm install
