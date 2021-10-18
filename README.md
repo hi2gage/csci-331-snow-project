@@ -19,14 +19,24 @@ git config --global alias.co checkout
 ```
 In order to contribute please check out this [article](https://medium.com/@jonathanmines/the-ultimate-github-collaboration-guide-df816e98fb67) about collaborating on Github.
 
-Creating new branch:
-```
-git co <branch-name>
-```
+
+**Do not use the main branch for develoment**
+
+
 
 Creating new branch and jumping into it 
 ```
 git co -b <branch-name>
+```
+
+Adding all changes to staging
+```
+git add .
+```
+
+Committing all changes to your branch
+```
+git commit -m "message tell us about what your changed"
 ```
 
 Pushing your branch back to Github so we can review the changes
@@ -35,4 +45,7 @@ git push --set-upstream origin <branch-name>
 git push
 ```
 
+
+
+Finally we will be using GitHub to manage all of the merges. 
 
