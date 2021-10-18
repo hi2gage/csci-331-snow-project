@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  node-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./server:/server
+    ports:
+      - "5000:5000"
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: pass
+      
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
