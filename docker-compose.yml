@@ -8,15 +8,37 @@ services:
     volumes:
       - ./server:/server
       - /server/node_modules
+    expose:
+      - ${APP_SERVER_PORT}
+    environment:
+      API_HOST: ${API_HOST}
+      APP_SERVER_PORT: ${APP_SERVER_PORT}
     ports:
-      - "5000:5000"
+      - "${APP_SERVER_PORT}:${APP_SERVER_PORT}"
+  
+  frontend:
+    container_name: frontend
+    build:
+      context: ./client
+      dockerfile: Dockerfile.frontend
+    volumes:
+      - ./client:/client
+      - '/app/node_modules'
+    expose: 
+      - ${REACT_APP_PORT}
+    ports:
+      - ${REACT_APP_PORT}:${REACT_APP_PORT}
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+   
   db:
     image: postgres:latest
     ports:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: pass
-
+  
   adminer:
     image: adminer
     restart: always
