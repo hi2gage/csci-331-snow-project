@@ -1,0 +1,10 @@
+PUT http://localhost:5000/api HTTP/1.1
+content-type: application/json
+
+{
+    "hour": 5,
+    "minute": 45,
+    "inches": 4
+}
+
+###

@@ -4,7 +4,6 @@ var app = express()
 
 
 
-
 //Define request response in root URL (/)
 app.get('/', function (req, res) {
   res.send('Now isnt this great. This is a real test')
@@ -13,6 +12,12 @@ app.get('/', function (req, res) {
 
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
+});
+
+
+
+app.put("/api", (req, res) => {
+  console.log(req.body.hour);
 });
 
 //Launch listening server on port 8080

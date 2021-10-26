@@ -25,6 +25,7 @@ function App() {
           <div class="border-solid border-red-500 x-10 p-6"><Timepicker /></div>
           <div class="border-solid border-red-500 x-10 p-6"><Timepicker /></div>
           <div class="border-solid border-red-500 x-10 p-6"><Timepicker /></div>
+          
         </div>
       </div>
     </body>

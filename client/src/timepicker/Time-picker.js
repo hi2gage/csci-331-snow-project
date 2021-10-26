@@ -4,7 +4,7 @@ import './../App.css';
 class Timepicker extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {hour: '10', minute: '55', snow: '0'};
+      this.state = {hour: '00', minute: '00', snow: '0'};
   
       this.handleChangeHour = this.handleChangeHour.bind(this);
       this.handleChangeMinute = this.handleChangeMinute.bind(this);
