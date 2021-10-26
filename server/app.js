@@ -1,7 +1,8 @@
 //Load express module with `require` directive
 var express = require('express')
-var app = express()
+var bodyParser = require('body-parser')
 
+var app = express()
 
 
 //Define request response in root URL (/)
@@ -16,8 +17,18 @@ app.get("/api", (req, res) => {
 
 
 
+app.use(express.json());
 app.put("/api", (req, res) => {
-  console.log(req.body.hour);
+  res.setHeader('Content-Type', 'text/plain')
+  res.write('you posted:\n')
+  res.end(JSON.stringify(req.body, null, 2))
+
+  var data = req.body;
+
+  console.log("\n------JSON-------")
+  console.log(JSON.stringify(data, null, 2))
+  
+  console.log(data);
 });
 
 //Launch listening server on port 8080
