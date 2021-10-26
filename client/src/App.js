@@ -11,11 +11,17 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
-    </div>
+    <body class="bg-grey-200 bg-h-min text-center min-h-screen">
+
+      <div class="flex h-screen">
+        <div class="m-auto text-grey-1000 font-">
+          <h3>{data}</h3>
+          <button>button</button>
+
+        </div>
+      </div>
+    </body>
+    
   );
 }
 
