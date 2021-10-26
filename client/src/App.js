@@ -16,14 +16,15 @@ function App() {
   }, []);
 
   return (
-    <body class="bg-grey-200 bg-h-min text-center min-h-screen">
+    <body class="bg-gray-200 bg-h-min text-center min-h-screen">
 
-      <div class="flex h-screen">
+      <div class="flex h-screen ">
         <div class="m-auto text-grey-1000 font-">
           <h3>{data}</h3>
           {/* <button>button</button> */}
-          <div class="border-solid border-red-500 x-10"><Timepicker /></div>
-          
+          <div class="border-solid border-red-500 x-10 p-6"><Timepicker /></div>
+          <div class="border-solid border-red-500 x-10 p-6"><Timepicker /></div>
+          <div class="border-solid border-red-500 x-10 p-6"><Timepicker /></div>
         </div>
       </div>
     </body>
