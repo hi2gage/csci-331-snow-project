@@ -4,43 +4,67 @@ import './../App.css';
 class Timepicker extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {value: ''};
+      this.state = {hour: '10', minute: '55'};
   
-      this.handleChange = this.handleChange.bind(this);
+      this.handleChangeHour = this.handleChangeHour.bind(this);
+      this.handleChangeMinute = this.handleChangeMinute.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
   
-    handleChange(event) {
-      this.setState({value: event.target.value});
+    handleChangeHour(event) {
+      this.setState({hour: event.target.value});
     }
+
+    handleChangeMinute(event) {
+        this.setState({minute: event.target.value});
+      }
   
     handleSubmit(event) {
-      alert('Your favorite flavor is: ' + this.state.value);
+      alert('You want to wake up at ' + this.state.hour + ':' + this.state.minute + ' based on X inches of snow');
       event.preventDefault();
     }
   
     render() {
       return (
-        <form onSubmit={this.handleSubmit} class="flex items-stretch  border-red-800">
-            <div class="p-4">
-                <select value={this.state.value} onChange={this.handleChange}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">10</option>
-                    <option value="12">12</option>
+          <div class="p-6 border-none hover:border-2 hover:border-red-800 ">
+              
+              <form onSubmit={this.handleSubmit}>
+                <label>Hours</label>
+                <select hour={this.state.hour} onChange={this.handleChangeHour} class="mr-5 ml-2">
+                    <option hour="1">1</option>
+                    <option hour="2">2</option>
+                    <option hour="3">3</option>
+                    <option hour="4">4</option>
+                    <option hour="5">5</option>
+                    <option hour="6">6</option>
+                    <option hour="7">7</option>
+                    <option hour="8">8</option>
+                    <option hour="9">9</option>
+                    <option hour="10">10</option>
+                    <option hour="11">10</option>
+                    <option hour="12">12</option>
                 </select>
-            </div>
 
-          <input type="submit" value="Submit" class="p-4 rounded bg-gray-300 border-gray-400 border-solid border-1"/>
-        </form>
+                <label>Minutes</label>
+                <select value={this.state.minute} onChange={this.handleChangeMinute} class="mr-20 ml-2">
+                    <option value-minute="00">00</option>
+                    <option value-minute="05">05</option>
+                    <option value-minute="10">10</option>
+                    <option value-minute="15">15</option>
+                    <option value-minute="20">20</option>
+                    <option value-minute="25">25</option>
+                    <option value-minute="30">30</option>
+                    <option value-minute="35">35</option>
+                    <option value-minute="40">40</option>
+                    <option value-minute="45">45</option>
+                    <option value-minute="50">50</option>
+                    <option value-minute="55">55</option>
+                </select>
+
+            <input type="submit" value="Submit" class="p-1 rounded hover:bg-blue-500 hover:shadow-md bg-blue-300"/>
+            </form>
+            
+          </div>
       );
     }
   }
