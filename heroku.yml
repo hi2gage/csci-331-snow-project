@@ -4,7 +4,7 @@ setup:
     as: DATABASE
 build:
   docker:
-    web: server/Dockerfile
-    web_client: client/Dockerfile.frontend
+    web: client/Dockerfile.frontend
+    web_client: 
 run:
   web: npm start
