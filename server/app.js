@@ -3,6 +3,7 @@ var express = require('express')
 var bodyParser = require('body-parser')
 
 var app = express()
+app.disable('etag');
 
 // Setting up app to use JSON
 app.use(express.json());
