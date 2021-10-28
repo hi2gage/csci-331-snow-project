@@ -4,7 +4,6 @@ var bodyParser = require('body-parser')
 
 var app = express()
 app.disable('etag');
-res.header("Access-Control-Allow-Origin", "*");
 
 // Setting up app to use JSON
 app.use(express.json());
