@@ -4,6 +4,8 @@ var bodyParser = require('body-parser')
 
 var app = express()
 
+// Setting up app to use JSON
+app.use(express.json());
 
 //Define request response in root URL (/)
 app.get('/', function (req, res) {
@@ -17,7 +19,7 @@ app.get("/api", (req, res) => {
 
 
 
-app.use(express.json());
+
 app.put("/api", (req, res) => {
   res.setHeader('Content-Type', 'text/plain')
   res.write('you posted:\n')

@@ -1,7 +1,7 @@
 FROM node:latest
 
 # Create app directory
-WORKDIR /app
+WORKDIR /server
 
 # Install app dependencies
 COPY package*.json ./
@@ -9,7 +9,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copying rest of the application to app directory
-COPY . /app
+COPY . /server
 
 # Expose the port and start the application
 EXPOSE $PORT
