@@ -1,7 +1,7 @@
 FROM node:latest
 
 # install required packages
-RUN apk add --no-cache --update python3 bash curl openssh ip
+RUN apt-get add --no-cache --update python3 bash curl openssh ip
 
 # Create app directory
 WORKDIR /app
