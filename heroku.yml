@@ -5,6 +5,5 @@ setup:
 build:
   docker:
     web_server: server/Dockerfile
-    web_client: client/Dockerfile.frontend
 run:
   web_server: npm start
