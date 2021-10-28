@@ -1,8 +1,10 @@
 //Load express module with `require` directive
 var express = require('express')
 var bodyParser = require('body-parser')
+var cors = require('cors');
 
 var app = express()
+app.use(cors());
 app.disable('etag');
 
 // Setting up app to use JSON
