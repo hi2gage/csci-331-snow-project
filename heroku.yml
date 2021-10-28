@@ -1,5 +1,10 @@
+setup:
+  addons:
+  - plan: heroku-postgresql
+    as: DATABASE
 build:
   docker:
-    web: server/Dockerfile
+    web_server: server/Dockerfile
+    web_client: client/Dockerfile.frontend
 run:
-  web: npm start
+  web_server: npm start
