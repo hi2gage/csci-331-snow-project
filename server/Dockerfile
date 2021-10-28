@@ -1,7 +1,5 @@
 FROM node:latest
 
-# install required packages
-RUN apt install python3 bash curl openssh ip
 
 # Create app directory
 WORKDIR /app
