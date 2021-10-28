@@ -3,8 +3,17 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var cors = require('cors');
 
+const corsOptions ={
+  origin:'*', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200,
+}
+
+
 var app = express()
-app.use(cors());
+
+app.use(cors(corsOptions)) // Use this after the variable declaration
+
 app.disable('etag');
 
 // Setting up app to use JSON
