@@ -1,5 +1,5 @@
 build:
   docker:
-    web_server: server/Dockerfile
+    web: server/Dockerfile
 run:
-  web_server: npm start
+  web: npm start
