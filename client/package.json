@@ -15,7 +15,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "craco --openssl-legacy-provider start",
     "build": "craco build",
     "test": "craco test"
   },
@@ -25,7 +25,7 @@
       "react-app/jest"
     ]
   },
-  "proxy": "http://node-server:5000",
+  "proxy": "http://csci-331-snow-project-node-server:5000",
   "browserslist": {
     "production": [
       ">0.2%",
