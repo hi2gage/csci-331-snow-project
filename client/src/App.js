@@ -12,8 +12,9 @@ function App() {
   React.useEffect(() => {
     fetch("/api")
       .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
+      .then((data) => setData(data.message))
+      .then(console.log(data));
+  }, [data]);
 
   return (
     <div className="bg-gray-200 bg-h-min text-center min-h-screen">

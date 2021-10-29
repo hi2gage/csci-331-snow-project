@@ -25,7 +25,7 @@
       "react-app/jest"
     ]
   },
-  "proxy": "http://node-server:5000",
+  "proxy": "http://csci-331-snow-project-node-server:5000",
   "browserslist": {
     "production": [
       ">0.2%",
