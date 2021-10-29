@@ -26,7 +26,9 @@ app.get('/', function (req, res) {
 
 
 app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server!" });
+  console.log("this works");
+  
+  res.json({hour: '00', minute: '00', snow: 0});
 });
 
 
