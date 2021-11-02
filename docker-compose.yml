@@ -38,6 +38,8 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: pass
+      POSTGRESQL_USERNAME: node
+      POSTGRES_DB: mainDB
   
   adminer:
     image: adminer

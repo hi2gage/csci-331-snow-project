@@ -2,6 +2,21 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 var cors = require('cors');
+require('dotenv').config()
+
+var dbAcess = require('./database/dbAccess')
+
+const { Pool, Client } = require("pg");
+
+const credentials = {
+  user: "postgres",
+  host: "db",
+  database: "mainDB",
+  password: "pass",
+  port: 5432,
+};
+const pool = new Pool(credentials);
+
 
 const corsOptions ={
   origin:'*', 
@@ -19,6 +34,8 @@ app.disable('etag');
 // Setting up app to use JSON
 app.use(express.json());
 
+
+
 //Define request response in root URL (/)
 app.get('/', function (req, res) {
   res.send('Now isnt this great. This is a real test')
@@ -26,9 +43,23 @@ app.get('/', function (req, res) {
 
 
 app.get("/api", (req, res) => {
-  console.log("this works");
-  
+
   res.json({hour: '00', minute: '00', snow: 0});
+});
+
+app.get("/apidb", (req, res) => {
+
+  // dbAcess.getAll().then(data => {
+  //   console.log(data);
+  //   res.json(data);
+  // });
+
+  dbAcess.getAll().then(data => {
+    res.send(JSON.stringify(data.rows, null, "   "));
+  });
+
+
+  
 });
 
 
