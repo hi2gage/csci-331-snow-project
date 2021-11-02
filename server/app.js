@@ -40,7 +40,12 @@ app.get("/apidb", (req, res) => {
 
   dbAcess.getAll().then((data) => {
     // res.send(process.env.LOCAL_OR_HEROKU);
-    res.send(JSON.stringify(data.rows, null, "   "));
+    if (process.env.LOCAL_OR_HEROKU == "local") {
+      res.send(JSON.stringify(data.rows, null, "  "));
+    }
+    else {
+      res.send(JSON.stringify(data, null, "  "));
+    }
   });
 });
 
