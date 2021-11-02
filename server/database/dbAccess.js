@@ -38,11 +38,8 @@ async function getAll(personId) {
         await client.connect();
 
         const now = client.query("SELECT * FROM times ORDER BY id ASC;");
-        for (let row of now.rows) {
-            console.log(JSON.stringify(row));
-        }
-        client.end();
-        return res;
+        await client.end();
+        return row;
 
     }
 }
