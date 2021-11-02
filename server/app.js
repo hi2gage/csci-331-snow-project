@@ -37,16 +37,16 @@ app.get("/apidb", (req, res) => {
   //   console.log(data);
   //   res.json(data);
   // });
-
-  dbAcess.getAll().then((data) => {
-    // res.send(process.env.LOCAL_OR_HEROKU);
-    if (process.env.LOCAL_OR_HEROKU == "local") {
+  if (process.env.LOCAL_OR_HEROKU == "local") {
+    dbAcess.getAll().then((data) => {
       res.send(JSON.stringify(data.rows, null, "  "));
-    }
-    else {
-      res.send(JSON.stringify(data, null, "  "));
-    }
-  });
+    });
+  }
+  else {
+    dbAcess.getAll.then((data) => {
+      es.send(JSON.stringify(data, null, "  "));
+    });
+  }
 });
 
 app.put("/api", (req, res) => {

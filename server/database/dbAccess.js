@@ -10,7 +10,6 @@ const credentials = {
 };
 
 async function getAll(personId) {
-  console.log(process.env.LOCAL_OR_HEROKU);
   if (process.env.LOCAL_OR_HEROKU == "local") {
     console.log("We are on local");
     const pool = new Pool(credentials);
@@ -19,6 +18,7 @@ async function getAll(personId) {
   
 } 
   else {
+      console.log("We are on Heroku");
     const client = new Client({
       connectionString: process.env.DATABASE_URL,
       ssl: {
