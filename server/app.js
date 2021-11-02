@@ -8,15 +8,21 @@ var dbAcess = require('./database/dbAccess')
 
 const { Pool, Client } = require("pg");
 
-const credentials = {
-  user: "postgres",
-  host: "db",
-  database: "mainDB",
-  password: "pass",
-  port: 5432,
-};
 
-const pool = new Pool(credentials);
+if(!process.env.LOCAL_OR_HEROKU === 'local') {
+  const credentials = {
+    user: "postgres",
+    host: "db",
+    database: "mainDB",
+    password: "pass",
+    port: 5432,
+  };
+  
+  const pool = new Pool(credentials);
+  console.log(process.env)
+}
+
+
 
 
 const corsOptions ={
@@ -36,7 +42,7 @@ app.disable('etag');
 app.use(express.json());
 
 
-console.log(process.env)
+
 
 //Define request response in root URL (/)
 app.get('/', function (req, res) {
@@ -56,7 +62,7 @@ app.get("/apidb", (req, res) => {
   //   console.log(data);
   //   res.json(data);
   // });
-
+  
   dbAcess.getAll().then(data => {
     res.send(JSON.stringify(data.rows, null, "   "));
   });
