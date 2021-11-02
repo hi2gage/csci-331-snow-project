@@ -42,11 +42,16 @@ app.get("/apidb", (req, res) => {
             res.send(JSON.stringify(data.rows, null, "  "));
         });
     } else {
-        dbAcess.getAll().then((data) => {
-            res.send(JSON.stringify(data, null, "  "));
-        });
+        res.send(JSON.stringify(data, null, "  "));
     }
 });
+
+
+app.get("/env", (req, res) => {
+    res.send(JSON.stringify(process.env, null, " <br> "));
+});
+
+
 
 app.put("/api", (req, res) => {
     res.setHeader("Content-Type", "text/plain");

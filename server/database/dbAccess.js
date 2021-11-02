@@ -10,6 +10,7 @@ const credentials = {
 };
 
 async function getAll(personId) {
+    console.log(process.env.LOCAL_OR_HEROKU);
     if (process.env.LOCAL_OR_HEROKU == "local") {
         // console.log("We are on local");
         // const pool = new Pool(credentials);
@@ -37,9 +38,9 @@ async function getAll(personId) {
 
         await client.connect();
 
-        const now = client.query("SELECT * FROM times ORDER BY id ASC;");
+        const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
         await client.end();
-        return row;
+        return now;
 
     }
 }
