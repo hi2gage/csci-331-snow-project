@@ -15,6 +15,7 @@ const credentials = {
   password: "pass",
   port: 5432,
 };
+
 const pool = new Pool(credentials);
 
 
@@ -35,11 +36,13 @@ app.disable('etag');
 app.use(express.json());
 
 
+console.log(process.env)
 
 //Define request response in root URL (/)
 app.get('/', function (req, res) {
-  res.send('Now isnt this great. This is a real test')
+  res.send(process.env.LOCAL_OR_HEROKU)
 })
+
 
 
 app.get("/api", (req, res) => {
