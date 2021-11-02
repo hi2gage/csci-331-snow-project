@@ -23,7 +23,7 @@ async function getAll(personId) {
         }
         await client.end();
 
-  return now;
+        return now;
 
 
     } else {
@@ -35,16 +35,15 @@ async function getAll(personId) {
             },
         });
 
-        client.connect();
+        await client.connect();
 
-        client.query("SELECT * FROM times ORDER BY id ASC;", (err, res) => {
-            if (err) throw err;
-            for (let row of res.rows) {
-                console.log(JSON.stringify(row));
-            }
-            client.end();
-            return res;
-        });
+        const now = client.query("SELECT * FROM times ORDER BY id ASC;");
+        for (let row of now.rows) {
+            console.log(JSON.stringify(row));
+        }
+        client.end();
+        return res;
+
     }
 }
 
