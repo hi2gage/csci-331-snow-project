@@ -1,54 +1,85 @@
 //Load express module with `require` directive
-var express = require('express')
-var bodyParser = require('body-parser')
-var cors = require('cors');
+var express = require("express");
+var bodyParser = require("body-parser");
+var cors = require("cors");
+require("dotenv").config();
 
-const corsOptions ={
-  origin:'*', 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200,
-}
+var dbAcess = require("./database/dbAccess");
 
+const { Pool, Client } = require("pg");
 
-var app = express()
+const corsOptions = {
+    origin: "*",
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+};
 
-app.use(cors(corsOptions)) // Use this after the variable declaration
+var app = express();
 
-app.disable('etag');
+app.use(cors(corsOptions)); // Use this after the variable declaration
+
+app.disable("etag");
 
 // Setting up app to use JSON
 app.use(express.json());
 
 //Define request response in root URL (/)
-app.get('/', function (req, res) {
-  res.send('Now isnt this great. This is a real test')
-})
-
-
-app.get("/api", (req, res) => {
-  console.log("this works");
-  
-  res.json({hour: '00', minute: '00', snow: 0});
+app.get("/", function (req, res) {
+    res.send(process.env.LOCAL_OR_HEROKU);
 });
 
+app.get("/api", (req, res) => {
+    res.json({ hour: "00", minute: "00", snow: 0 });
+});
+
+app.get("/apidb", (req, res) => {
+    // dbAcess.getAll().then(data => {
+    //   console.log(data);
+    //   res.json(data);
+    // });
+    if (process.env.LOCAL_OR_HEROKU == "local") {
+        dbAcess.getAll().then((data) => {
+            res.send(JSON.stringify(data.rows, null, "  "));
+        });
+    } else {
+        console.log("We are on Heroku");
+        const client = new Client({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false,
+            },
+        });
+
+        client.connect();
+
+        const now = client.query("SELECT * FROM times ORDER BY id ASC;");
+        client.end();
+        console.log(now);
+        res.send(JSON.stringify(now, null, "  "));
+    }
+});
+
+
+app.get("/env", (req, res) => {
+    res.send(JSON.stringify(process.env, null, " <br> "));
+});
 
 
 
 app.put("/api", (req, res) => {
-  res.setHeader('Content-Type', 'text/plain')
-  res.write('you posted:\n')
-  res.end(JSON.stringify(req.body, null, 2))
+    res.setHeader("Content-Type", "text/plain");
+    res.write("you posted:\n");
+    res.end(JSON.stringify(req.body, null, 2));
 
-  var data = req.body;
+    var data = req.body;
 
-  console.log("\n------JSON-------")
-  console.log(JSON.stringify(data, null, 2))
-  
-  console.log(data);
+    console.log("\n------JSON-------");
+    console.log(JSON.stringify(data, null, 2));
+
+    console.log(data);
 });
 
 //Launch listening server on port 8080
 app.listen(process.env.PORT || 5000, function () {
-  console.log('app listening on port 5000 or whatever you like!')
-})
-
+    console.log("app listening on port 5000 or whatever you like!");
+});
