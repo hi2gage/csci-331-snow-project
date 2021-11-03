@@ -43,8 +43,6 @@ services:
       POSTGRES_PASSWORD: pass
       POSTGRESQL_USERNAME: node
       POSTGRES_DB: mainDB
-    volumes:
-      - ./postgres-data:/var/lib/postgresql/data
   
   adminer:
     image: adminer
