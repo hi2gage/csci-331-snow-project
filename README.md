@@ -9,9 +9,7 @@ Steps to get started:
 git clone https://github.com/hi2gage/csci-331-snow-project.git
 cd csci-331-snow-project
 npm install react-router-dom
-cd csci-331-snow-project/client
 npm install tailwindcss
-cd ..
 docker compose up --build
 ```
 You should have access [localhost:5000](http://localhost:5000)
