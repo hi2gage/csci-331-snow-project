@@ -30,6 +30,8 @@ services:
       - ${REACT_APP_PORT}
     ports:
       - ${REACT_APP_PORT}:${REACT_APP_PORT}
+    links:
+      - node-server
     stdin_open: true
     environment:
       - CHOKIDAR_USEPOLLING=true

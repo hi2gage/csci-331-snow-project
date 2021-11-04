@@ -23,24 +23,27 @@ app.disable("etag");
 // Setting up app to use JSON
 app.use(express.json());
 
+
+
+
+
 //Define request response in root URL (/)
 app.get("/", function (req, res) {
     res.send(process.env.LOCAL_OR_HEROKU);
 });
+
 
 app.get("/api", (req, res) => {
     res.json({ hour: "00", minute: "00", snow: 0 });
 });
 
 app.get("/apidb", (req, res) => {
-    // dbAcess.getAll().then(data => {
-    //   console.log(data);
-    //   res.json(data);
-    // });
     if (process.env.LOCAL_OR_HEROKU == "local") {
         dbAcess.getAll().then((data) => {
-            res.send(JSON.stringify(data.rows, null, "  "));
+            // console.log(JSON.stringify(data.rows, null, "  "))
+            res.send(data.rows);
         });
+
     } else {
         console.log("We are on Heroku");
         const client = new Client({
@@ -54,7 +57,6 @@ app.get("/apidb", (req, res) => {
 
         const now = client.query("SELECT * FROM times ORDER BY id ASC;");
         client.end();
-        console.log(now);
         res.send(JSON.stringify(now, null, "  "));
     }
 });

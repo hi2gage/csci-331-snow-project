@@ -10,23 +10,21 @@ const credentials = {
 };
 
 async function getAll(personId) {
-    console.log(process.env.LOCAL_OR_HEROKU);
+    
+
     if (process.env.LOCAL_OR_HEROKU == "local") {
-        // console.log("We are on local");
-        // const pool = new Pool(credentials);
-        // const text = `SELECT * FROM times ORDER BY id ASC`;
-        // return pool.query(text);
+        console.log("Hit the API");
         const client = new Client(credentials);
         await client.connect();
         const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
-        for (let row of now.rows) {
-            console.log(JSON.stringify(row));
-        }
+        // for (let row of now.rows) {
+        //     console.log(JSON.stringify(row));
+        // }
         await client.end();
 
         return now;
 
-
+    
     } else {
         console.log("We are on Heroku");
         const client = new Client({
