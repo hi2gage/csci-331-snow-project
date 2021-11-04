@@ -24,12 +24,12 @@ function Api_Test() {
 
     function table() {
         return (
-            <div className="px-10 py-2">
+            <div className="px-10 py-2 flex justify-center">
                 <table className="px-10 py-2 table-auto text-center">
                     <tr>
-                        <th className="w-6 px-5 py-2 border-2 border-green-800">Snow</th>
-                        <th className="w-6 px-5 py-2 border-2 border-green-800">Hour</th>
-                        <th className="w-6 px-5 py-2 border-2 border-green-800">Minute</th>
+                        <th className="w-6 px-5 py-2 ">Snow</th>
+                        <th className="w-6 px-5 py-2 ">Hour</th>
+                        <th className="w-6 px-5 py-2 ">Minute</th>
                     </tr>
                     <tr>
                         <td>{data[0].snow}"</td>
@@ -63,7 +63,7 @@ function Api_Test() {
     return (
         <div className="flex h-screen justify-center items-center px-10 py-10">
             <div className="">
-                <div className='text-3xl border-2 border-yellow-800'>{(data == null) ? 'not loaded' : table()}</div>
+                <div className='text-3xl' >{(data == null) ? 'not loaded' : table()}</div>
                 
                 <div className='text-3xl'>{(data == null) ? 'not loaded' : <Timepicker hour={'0' + data[0].hr.toString()} minute={data[0].min.toString()} />}</div>
                 
