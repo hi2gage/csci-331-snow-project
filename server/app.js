@@ -23,10 +23,6 @@ app.disable("etag");
 // Setting up app to use JSON
 app.use(express.json());
 
-
-
-
-
 //Define request response in root URL (/)
 app.get("/", function (req, res) {
     res.send(process.env.LOCAL_OR_HEROKU);
