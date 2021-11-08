@@ -53,11 +53,11 @@ async function setAll(info) {
     await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
 
     var num = 9;
-    var sql = "INSERT INTO times(snow, hr, min) VALUES('0-3', ?, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);";
+    var sql = "INSERT INTO times(snow, hr, min) VALUES('0-3', 8, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);";
     // var sql = 'INSERT INTO times(snow, hr, min) VALUES("0-3", ${num}, 30), ("4-7", 7, 00), ("8-11", 6, 30), ("11+", 6, 00);';
 
 
-    client.query(sql, num, function(err, rows, fields){});
+    client.query(sql, function(err, rows, fields){});
     const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
     client.end()
 
