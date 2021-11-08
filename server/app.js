@@ -57,6 +57,32 @@ app.get("/apidb", (req, res) => {
     }
 });
 
+app.post("/apidb", (req, res) => {
+    if (process.env.LOCAL_OR_HEROKU == "local") {
+        dbAcess.setAll().then((data) => {
+            // console.log(JSON.stringify(data.rows, null, "  "))
+            
+            res.send(data.rows);
+        });
+
+    } else {
+        console.log("We are on Heroku");
+        const client = new Client({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false,
+            },
+        });
+
+        client.connect();
+
+        const now = client.query("SELECT * FROM times ORDER BY id ASC;");
+        client.end();
+        res.send(JSON.stringify(now, null, "  "));
+    }
+});
+
+
 
 app.get("/env", (req, res) => {
     res.send(JSON.stringify(process.env, null, " <br> "));

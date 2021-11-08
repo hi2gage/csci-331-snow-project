@@ -9,8 +9,8 @@ const credentials = {
     port: 5432,
 };
 
-async function getAll(personId) {
-    
+async function getAll() {
+
 
     if (process.env.LOCAL_OR_HEROKU == "local") {
         console.log("Hit the API");
@@ -24,7 +24,7 @@ async function getAll(personId) {
 
         return now;
 
-    
+
     } else {
         console.log("We are on Heroku");
         const client = new Client({
@@ -43,23 +43,47 @@ async function getAll(personId) {
     }
 }
 
+async function setAll(info) {
+    console.log("Setting Up the database.");
+
+    const client = new Client(credentials);
+    await client.connect();
+
+    await client.query('DROP TABLE IF EXISTS "times";');
+    await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
+
+    var num = 9;
+    var sql = "INSERT INTO times(snow, hr, min) VALUES('0-3', ?, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);";
+    // var sql = 'INSERT INTO times(snow, hr, min) VALUES("0-3", ${num}, 30), ("4-7", 7, 00), ("8-11", 6, 30), ("11+", 6, 00);';
+
+
+    client.query(sql, num, function(err, rows, fields){});
+    const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
+    client.end()
+
+
+    return now;
+
+}
+
+
 async function setupDb() {
     console.log("Setting Up the database.");
 
     const client = new Client(credentials);
-        await client.connect();
+    await client.connect();
 
-        await client.query('DROP TABLE IF EXISTS "times";');
-        await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
+    await client.query('DROP TABLE IF EXISTS "times";');
+    await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
 
-        
-        client.query("INSERT INTO times(snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
-        const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
-        client.end()
 
-        return now;
+    client.query("INSERT INTO times(snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
+    const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
+    client.end()
+
+    return now;
 
 
 }
 
-module.exports = { getAll, setupDb};
+module.exports = { getAll, setupDb, setAll };
