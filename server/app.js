@@ -34,10 +34,12 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/apidb", (req, res) => {
+    
     if (process.env.LOCAL_OR_HEROKU == "local") {
         dbAcess.getAll().then((data) => {
-            console.log(JSON.stringify(data.rows, null, "  "))
+            // console.log(JSON.stringify(data.rows, null, "  "))
             res.send(data.rows);
+            
         });
 
     } else {
@@ -58,11 +60,13 @@ app.get("/apidb", (req, res) => {
 });
 
 app.post("/apidb", (req, res) => {
+    console.log(req);
     if (process.env.LOCAL_OR_HEROKU == "local") {
-        dbAcess.setAll().then((data) => {
+        dbAcess.setAll([7, 30, 7, 00, 6, 30, 6, 999]).then((data) => {
             // console.log(JSON.stringify(data.rows, null, "  "))
-            
-            res.send(data.rows);
+            console.log(req.body.test);
+            // res.send(data.rows);
+            res.send((req.body.test));
         });
 
     } else {
