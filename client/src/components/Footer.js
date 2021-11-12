@@ -8,10 +8,13 @@ function Footer() {
     <div className='footer-container'>
       <section className='footer-subscription'>
         <p className='footer-subscription-heading'>
-          Join the Snow Alarm Clock family
+          Join the Snow Alarm Clock notifications!
         </p>
         <p className='footer-subscription-text'>
-          You can unsubcribe at anytime 
+          Once added you will receive notifications about when there might be sick snow somewhere! 
+        </p>
+        <p className='footer-subscription-text'>
+        You can unsubscribe at anytime!
         </p>
         <div className='input-areas'>
           <form>
@@ -64,7 +67,7 @@ function Footer() {
         <div class='social-media-wrap'>
           <div class='footer-logo'>
             <Link to='/' className='social-logo'>
-                    SNOW <i class="fa-solid fa-snowflake"></i>
+                    SNOW <i class="fas fa-snowflake"></i>
             </Link>
           </div>
           <small class='website-rights'>SNOW © 2020</small>
