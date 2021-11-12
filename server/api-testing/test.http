@@ -6,7 +6,13 @@ content-type: application/json
 # 	"age" : 36,
 # 	"rights" : [ 7, 30, 7, 0, 6, 30, 6, 0 ]
 # }
-[ 7, 30, 7, 0, 6, 30, 6, 0 ]
+[ 7, 30, 7, 0, 6, 30, 6, 999 ]
+
+###
+
+GET  http://localhost:5000/apidb HTTP/1.1
+content-type: application/json
+
 ###
 
 GET  http://localhost:5000/setup HTTP/1.1

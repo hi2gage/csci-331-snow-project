@@ -62,9 +62,10 @@ app.get("/apidb", (req, res) => {
 app.post("/apidb", (req, res) => {
     console.log(req);
     if (process.env.LOCAL_OR_HEROKU == "local") {
-        dbAcess.setAll([7, 30, 7, 00, 6, 30, 6, 999]).then((data) => {
+        dbAcess.setAll(req.body).then((data) => {
             // console.log(JSON.stringify(data.rows, null, "  "))
-            console.log(req.body);
+
+            // console.log(req.body);
             // res.send(data.rows);
             res.send((req.body));
         });
