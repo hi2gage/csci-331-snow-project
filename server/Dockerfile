@@ -22,5 +22,6 @@ RUN rm /bin/sh \
  && chmod +x /app/.profile.d/heroku-exec.sh \
  && ln -s /usr/bin/python3 /usr/bin/python
 
+ENV LOCAL_OR_HEROKU: heroku
 
 CMD ["npm","start"]
