@@ -65,7 +65,7 @@ function Api_Test() {
             <div className="">
                 <div className='text-3xl' >{(data == null) ? 'not loaded' : table()}</div>
                 
-                <div className='text-xl'>{(data == null) ? 'not loaded' : <Timepicker hour={'0' + data[0].hr.toString()} minute={data[0].min.toString()} />}</div>
+                <div className='text-xl'>{(data == null) ? 'not loaded' : <Timepicker hour={data[2].hr} minute={data[2].min} />}</div>
                 
             </div>
 
