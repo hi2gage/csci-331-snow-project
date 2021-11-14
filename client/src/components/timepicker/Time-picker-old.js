@@ -1,5 +1,5 @@
 import React from "react";
-import './../App.css';
+import '../../App.css';
 
 class Timepicker extends React.Component {
     constructor(props) {

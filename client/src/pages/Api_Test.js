@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 // import '../../App.css';
-import '../../index.css';
+import '../index.css';
 import axios from 'axios';
-import Timepicker from '../../timepicker/Time-picker'
+import Timepicker from '../components/timepicker/Time-picker'
 
 
 
