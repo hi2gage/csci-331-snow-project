@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import '../../App.css';
-import LoginForm from './Form/LoginForm';
+import '../App.css';
+import LoginForm from '../components/Form/LoginForm';
 
 export default function SignUp() {
   const adminUser = {
