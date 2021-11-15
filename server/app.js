@@ -16,6 +16,7 @@ const corsOptions = {
 
 var app = express();
 
+
 app.use(cors(corsOptions)); // Use this after the variable declaration
 
 app.disable("etag");
