@@ -68,7 +68,7 @@ app.post("/apidb", (req, res) => {
         dbAcess.setAll(req.body).then((data) => {
 
 
-            // console.log(req.body);
+            console.log(req.body);
             // res.send(data.rows);
             res.send(data.rows);
         });
