@@ -4,21 +4,19 @@ import { useState, useEffect } from 'react';
 
 function toStringNum(time) {
     console.log(time)
-    // var hour = ''
-    // var minute = ''
-    if(time.hour < 10) {
+    if (time.hour < 10) {
         var hour = '0' + time.hour.toString()
     }
     else {
         var hour = time.hour.toString()
     }
-    if(time.minute < 10) {
+    if (time.minute < 10) {
         var minute = '0' + time.minute.toString()
     }
     else {
         var minute = time.minute.toString()
     }
-    return {hour: hour, minute: minute};
+    return { hour: hour, minute: minute };
 }
 
 function Timepicker(props) {
@@ -35,10 +33,8 @@ function Timepicker(props) {
 
     return (
         <div>
-
-            <div className="pb-3">
+            {/* <div className="pb-3">
                 <form classaName="flex flex-row" onSubmit={handleSubmit}>
-                    {/* <div> */}
                     <label className="font-bold ">Snow</label>
 
                     <select hour={state.hour}
@@ -47,7 +43,6 @@ function Timepicker(props) {
                         <option hour="00">00</option>
                         <div>test</div>
                     </select>
-                    {/* </div> */}
 
 
                     <label className="font-bold">Hours</label>
@@ -69,17 +64,6 @@ function Timepicker(props) {
                         <option hour="10">10</option>
                         <option hour="11">10</option>
                         <option hour="12">12</option>
-                        {/* <option hour="13">13</option>
-                  <option hour="14">14</option>
-                  <option hour="15">15</option>
-                  <option hour="16">16</option>
-                  <option hour="17">17</option>
-                  <option hour="18">18</option>
-                  <option hour="19">19</option>
-                  <option hour="20">20</option>
-                  <option hour="21">21</option>
-                  <option hour="22">22</option>
-                  <option hour="23">23</option> */}
 
                     </select>
 
@@ -117,7 +101,8 @@ function Timepicker(props) {
 
                 </form>
 
-            </div>
+            </div>  */}
+
 
             <h1 class="text-3xl">Your form title</h1>
             <form class="flex flex-row bg-blue-500 p-2 items-stretch">
