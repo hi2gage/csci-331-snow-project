@@ -1,13 +1,7 @@
 POST  http://localhost:5000/apidb HTTP/1.1
 content-type: application/json
 
-# {
-# 	"name" : "Admin",
-# 	"age" : 36,
-# 	"rights" : [ 7, 30, 7, 0, 6, 30, 6, 0 ]
-# }
-[ 7, 30, 7, 0, 6, 30, 6, 999 ]
-
+[ 7, 30, 7, 0, 6, 30, 6, 0 ]
 ###
 
 GET  http://localhost:5000/apidb HTTP/1.1

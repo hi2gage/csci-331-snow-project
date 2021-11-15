@@ -1,13 +1,13 @@
 import "./App.css";
 
 import React from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import {BrowserRouter as Router,Switch, Route } from 'react-router-dom';
-import Home from './components/pages/Home';
-import Services from './components/pages/Services';
-import Products from './components/pages/Products';
-import SignUp from './components/pages/SignUp';
-import Api_Test from "./components/pages/Api_Test";
+import Home from './pages/Home';
+import Services from './pages/Services';
+import Products from './pages/Products';
+import SignUp from './pages/SignUp';
+import Api_Test from "./pages/Api_Test";
 
 
 function App() {

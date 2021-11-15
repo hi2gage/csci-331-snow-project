@@ -1,8 +1,28 @@
-import './../App.css';
+import '../../App.css';
 import { useState, useEffect } from 'react';
 
+
+function toStringNum(time) {
+    console.log(time)
+    // var hour = ''
+    // var minute = ''
+    if(time.hour < 10) {
+        var hour = '0' + time.hour.toString()
+    }
+    else {
+        var hour = time.hour.toString()
+    }
+    if(time.minute < 10) {
+        var minute = '0' + time.minute.toString()
+    }
+    else {
+        var minute = time.minute.toString()
+    }
+    return {hour: hour, minute: minute};
+}
+
 function Timepicker(props) {
-    const [state, setSnow] = useState({ hour: props.hour, minute: '03' });
+    const [state, setSnow] = useState(toStringNum(props));
 
 
     const handleSubmit = (e) => {
@@ -90,9 +110,9 @@ function Timepicker(props) {
 
                         <input className="border-green-900 border-2"
                             type="button"
-                            value="Restart"
+                            value="Reset"
                             className="p-1 rounded hover:bg-red-500 hover:shadow-md bg-red-300"
-                            onClick={e => setSnow({ hour: props.hour, minute: props.minute })} />
+                            onClick={e => setSnow(toStringNum(props))} />
                     </div>
 
                 </form>
