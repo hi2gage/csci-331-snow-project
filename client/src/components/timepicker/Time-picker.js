@@ -19,7 +19,7 @@ function toStringNum(time) {
     return { hour: hour, minute: minute };
 }
 
-function Timepicker(props) {
+function Timepicker(props, ) {
     const [state, setSnow] = useState(toStringNum(props));
 
 
