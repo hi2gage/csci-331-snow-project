@@ -16,6 +16,7 @@ const corsOptions = {
 
 var app = express();
 
+
 app.use(cors(corsOptions)); // Use this after the variable declaration
 
 app.disable("etag");
@@ -33,6 +34,7 @@ app.get("/api", (req, res) => {
     res.json({ hour: "00", minute: "00", snow: 0 });
 });
 
+// Getter
 app.get("/apidb", (req, res) => {
     
     if (process.env.LOCAL_OR_HEROKU == "local") {
@@ -59,14 +61,16 @@ app.get("/apidb", (req, res) => {
     }
 });
 
+// Poster
 app.post("/apidb", (req, res) => {
-    console.log(req);
+    console.log(req.body);
     if (process.env.LOCAL_OR_HEROKU == "local") {
-        dbAcess.setAll([7, 30, 7, 00, 6, 30, 6, 999]).then((data) => {
-            // console.log(JSON.stringify(data.rows, null, "  "))
-            console.log(req.body);
+        dbAcess.setAll(req.body).then((data) => {
+
+
+            // console.log(req.body);
             // res.send(data.rows);
-            res.send((req.body));
+            res.send(data.rows);
         });
 
     } else {

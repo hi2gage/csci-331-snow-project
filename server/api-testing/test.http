@@ -4,9 +4,17 @@ content-type: application/json
 [ 7, 30, 7, 0, 6, 30, 6, 0 ]
 ###
 
-GET  http://localhost:5000/setup HTTP/1.1
+GET  http://localhost:5000/apidb HTTP/1.1
 content-type: application/json
 
 ###
 
-"test": [7, 30, 7, 00, 6, 30, 6, 00]
+GET   http://localhost:5000/apidb HTTP/1.1
+content-type: application/json
+
+###
+
+GET  http://localhost:5000/setup HTTP/1.1
+content-type: application/json
+
+###
