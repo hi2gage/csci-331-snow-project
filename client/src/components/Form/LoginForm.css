@@ -27,6 +27,7 @@ input, button {
 #loginform {
     display: flex; 
     position: relative;
+    justify-content: center;
 }
 
 #loginform:after{
@@ -99,9 +100,15 @@ input, button {
     font-size: 27px;
     font-weight: 700;
     cursor: pointer;
+    margin-left: 95px;
 }
 
 .error{
     font-size: 15px;
     color: #666;
+}
+
+#link {
+    display: flex;
+    justify-content: center;
 }
