@@ -33,7 +33,6 @@ function stateToArray(data) {
 }
 
 
-
 function Api_Test() {
     const [data, setData] = useState();
 
@@ -52,12 +51,12 @@ function Api_Test() {
 
     function table() {
         return (
-            <div className="px-10 py-2 flex justify-center">
-                <table className="px-10 py-2 table-auto text-center">
+            <div className="">
+                <table className="">
                     <tr>
-                        <th className="w-6 px-5 py-2 ">Snow</th>
-                        <th className="w-6 px-5 py-2 ">Hour</th>
-                        <th className="w-6 px-5 py-2 ">Minute</th>
+                        <th className="">Snow</th>
+                        <th className="">Hour</th>
+                        <th className="">Minute</th>
                     </tr>
                     <tr>
                         <td>{data[0].snow}"</td>
@@ -89,24 +88,25 @@ function Api_Test() {
 
 
     return (
-        <div className="flex h-screen justify-center items-center px-10 py-10">
-            <div className="border-2 border-purple-900 w-3/4">
-                {/* <div className='text-3xl py-5' >{(data == null) ? 'not loaded' : table()}</div> */}
-                {/* <div>{(data == null) ? 'not loaded' : <fourTime hour={data[0].hr} minute={data[0].min} />}</div> */}
+        <div className="">
+            <div className="">
 
-                <div className='text-xl px-4'>{(data == null) ? 'not loaded' : <Timepicker hour={data[0].hr} 
+
+
+                <div className=''>{(data == null) ? 'not loaded' : <Timepicker hour={data[0].hr} 
                                                                                       minute={data[0].min} 
                                                                                       snow={data[0].snow} 
                                                                                       data={data} 
                                                                                       />}</div>
                 
-                                                                                
+
                 {/* This Button pulls the data from server */}
-                <div className="text-center">
+                {/* TODO: Format the button try to keep the button inside the div if possible rename is nessesary*/}
+                <div className="">
                     <input className=""
                         type="button"
                         value="Reset from Server"
-                        className="p-1 rounded hover:bg-red-500 hover:shadow-md bg-red-300"
+                        className=""
                         form="time-picker"
                         onClick={e => getFromApi()} />
                 </div>
