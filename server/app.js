@@ -36,12 +36,12 @@ app.get("/api", (req, res) => {
 
 // Getter
 app.get("/apidb", (req, res) => {
-    
+
     if (process.env.LOCAL_OR_HEROKU == "local") {
         dbAcess.getAll().then((data) => {
             // console.log(JSON.stringify(data.rows, null, "  "))
             res.send(data.rows);
-            
+
         });
 
     } else {
@@ -84,9 +84,15 @@ app.post("/apidb", (req, res) => {
 
         client.connect();
 
-        const now = client.query("SELECT * FROM times ORDER BY id ASC;");
+        client.query('DROP TABLE IF EXISTS "times";');
+        client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
+
+        var sql = 'INSERT INTO times(snow, hr, min) VALUES("0-3", 99, 30), ("4-7", 7, 00), ("8-11", 6, 30), ("11+", 6, 00);';
+
+
+        client.query(sql, function(err, rows, fields){});
         client.end();
-        res.send(JSON.stringify(now, null, "  "));
+        res.send("testing");
     }
 });
 
