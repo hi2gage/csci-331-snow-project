@@ -1,0 +1,8 @@
+#signupForm {
+    margin: 0px;
+    background-color: white;
+}
+
+.sign-up {
+    background-image: linear-gradient(to bottom right, rgb(0, 183, 255), gray);;
+}

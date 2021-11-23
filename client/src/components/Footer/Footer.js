@@ -32,7 +32,7 @@ function Footer() {
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
             <h2>About Us</h2>
-            <Link to='/sign-up'>How it works</Link>
+            <Link to='/login'>How it works</Link>
             <Link to='/'>Test</Link>
             <Link to='/'>Test</Link>
             <Link to='/'>Test</Link>
@@ -96,22 +96,6 @@ function Footer() {
             >
               <i class='fab fa-youtube' />
             </Link>
-            {/* <Link
-              class='social-icon-link twitter'
-              to='/'
-              target='_blank'
-              aria-label='Twitter'
-            >
-              <i class='fab fa-twitter' />
-            </Link> */}
-            {/* <Link
-              class='social-icon-link twitter'
-              to='/'
-              target='_blank'
-              aria-label='LinkedIn'
-            >
-              <i class='fab fa-linkedin' />
-            </Link> */}
           </div>
         </div>
       </section>
