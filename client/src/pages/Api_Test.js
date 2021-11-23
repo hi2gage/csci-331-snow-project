@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import '../index.css';
 import axios from 'axios';
 import Timepicker from '../components/timepicker/Time-picker-1'
+import {fourTime} from '../components/timepicker/Time-picker-1'
 
 function toStringNum(time) {
     if (time.hour < 10) {
@@ -36,13 +37,11 @@ function stateToArray(data) {
 function Api_Test() {
     const [data, setData] = useState();
 
-    const [state, setSnow] = useState();
-
 
     const getFromApi = () => {
         axios.get('/apidb')
             .then(response => {
-                console.log(JSON.stringify(response.data, null, " "));
+                // console.log(JSON.stringify(response.data, null, " "));
                 const info = response.data;
                 setData(info);
             })
@@ -75,43 +74,44 @@ function Api_Test() {
                         <td>{data[2].hr}</td>
                         <td>{data[2].min}</td>
                     </tr>
+                    <tr>
+                        <td>{data[3].snow}"</td>
+                        <td>{data[3].hr}</td>
+                        <td>{data[3].min}</td>
+                    </tr>
                 </table>
             </div>
+            
         )
     }
 
-    // <div class="flex h-screen justify-center items-center">
-    //     <div class="text-center bg-blue-400"> <!-- ⬅️ THIS DIV WILL BE CENTERED -->
-    //         <h1 class="text-3xl">HEADING</h1>
-    //         <p class="text-xl">Sub text</p>
-    //     </div>
-    // </div>
+    
 
 
 
     return (
         <div className="flex h-screen justify-center items-center px-10 py-10">
-            <div className="border-2 border-purple-900">
-                <div className='text-3xl' >{(data == null) ? 'not loaded' : table()}</div>
+            <div className="border-2 border-purple-900 w-3/4">
+                {/* <div className='text-3xl py-5' >{(data == null) ? 'not loaded' : table()}</div> */}
+                {/* <div>{(data == null) ? 'not loaded' : <fourTime hour={data[0].hr} minute={data[0].min} />}</div> */}
 
-                <div className='text-xl'>{(data == null) ? 'not loaded' : <Timepicker hour={data[0].hr} minute={data[0].min} />}</div>
-
+                <div className='text-xl px-4'>{(data == null) ? 'not loaded' : <Timepicker hour={data[0].hr} 
+                                                                                      minute={data[0].min} 
+                                                                                      snow={data[0].snow} 
+                                                                                      data={data} 
+                                                                                      />}</div>
+                
+                                                                                
+                {/* This Button pulls the data from server */}
                 <div className="text-center">
                     <input className=""
                         type="button"
-                        value="Reset"
+                        value="Reset from Server"
                         className="p-1 rounded hover:bg-red-500 hover:shadow-md bg-red-300"
                         form="time-picker"
-                        onClick={e => console.log(e.target)} />
-
-
+                        onClick={e => getFromApi()} />
                 </div>
             </div>
-
-
-
-
-
         </div>
     )
 }
