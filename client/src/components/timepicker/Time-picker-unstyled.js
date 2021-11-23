@@ -76,25 +76,22 @@ function Picker({ state, setSnow, index }) {
     }
 
     return (
-        <form id="time-picker" className=""
+        <form className="time-picker"
             onSubmit={handleSubmit}>
 
             {/* TODO: Format Snow Range */}
-            <div class="">
-                <div class="">
-                    <label className=" ">{"Snow: " + state[index].snow}</label>
+                <div className="snowRange">
+                    <label className=" ">{state[index].snow}</label>
                 </div>
-            </div>
 
             {/* TODO: Format the hour selector */}
-            <div class="">
-                <div class="">
-                    <label className="">Hour</label>
+            <div className="snowRange">
+                    {/*<label className="hourLabel">Hour</label>*/}
                     <select hour={state[index].hour}
                         value={state[index].hour}
                         defaultValue={state[index].hour}
                         onChange={e => updateHour(e)}
-                        className="">
+                        className="hourSelect">
                         <option hour="00">00</option>
                         <option hour="01">01</option>
                         <option hour="02">02</option>
@@ -109,19 +106,17 @@ function Picker({ state, setSnow, index }) {
                         <option hour="11">10</option>
                         <option hour="12">12</option>
                     </select>
-                </div>
             </div>
 
 
             {/* TODO: Format the minute selector */}
-            <div class="">
-                <div class="">
-                    <label className="">Minute</label>
+            <div class="snowRange">
+                    {/*<label className="minuteLabel">Minute</label>*/}
                     <select minute={state[index].minute}
                         value={state[index].minute}
                         defaultValue={state[index].minute}
                         onChange={e => updateMin(e)}
-                        className="">
+                        className="minuteSelect">
                         <option minute="00">00</option>
                         <option minute="05">05</option>
                         <option minute="10">10</option>
@@ -136,7 +131,6 @@ function Picker({ state, setSnow, index }) {
                         <option minute="55">55</option>
                     </select>
                 </div>
-            </div>
         </form>
     )
 }
@@ -164,7 +158,7 @@ function Timepicker(props) {
 
     // Returns the view of the 4 pickers
     return (
-        <div className="">
+        <>
             <Picker state={state} setSnow={setSnow} index={0} />
             <Picker state={state} setSnow={setSnow} index={1} />
             <Picker state={state} setSnow={setSnow} index={2} />
@@ -173,8 +167,8 @@ function Timepicker(props) {
 
             {/* Submits data to server*/}
             {/* TODO: Format button and rename if neccessary */}
-            <div className="">
-                <input className=""
+            <div className="submitDiv">
+                <input className="submitButton"
                     type="submit"
                     value="Submit to Server"
                     form="time-picker"
@@ -195,7 +189,7 @@ function Timepicker(props) {
                 /> */}
             </div>
 
-        </div>
+        </>
 
     );
 }

@@ -1,0 +1,29 @@
+.timePickerComponent {
+    display: flex;
+    flex-direction: column;
+}
+
+.time-picker {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.snowRange {
+display: grid;
+}
+
+#tableLabels {
+display: flex;
+justify-content: space-evenly;
+}
+
+.submitDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.resetDiv {
+    display: flex;
+    justify-content: center;
+}
