@@ -2,7 +2,7 @@ import "./App.css";
 
 import React from 'react';
 import Navbar from './components/Navbar/Navbar';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Products from './pages/Products';
@@ -11,8 +11,14 @@ import Api_Test_Unstyled from "./pages/Api_Test_Unstyled";
 import SignUp from "./pages/SignUp";
 
 
+function getToken() {
+    const tokenString = sessionStorage.getItem('token');
+    const userToken = JSON.parse(tokenString);
+    return userToken?.token
+}
+
 function App() {
-    const status = false
+    const token = getToken();
     const [data, setData] = React.useState(null);
 
     React.useEffect(() => {
@@ -25,14 +31,14 @@ function App() {
     return (
         <>
             <Router>
-                <Navbar status={true} />
+                <Navbar userStatus={(token)} />
                 <Switch>
-                    <Route path='/' exact component={Home}/>
-                    <Route path='/services' component={Services}/>
-                    <Route path='/products' component={Products}/>
-                    <Route path='/login' component={LogIn}/>
-                    <Route path='/api' component={Api_Test_Unstyled}/>
-                    <Route path='/sign-up' component={SignUp}/>
+                    <Route path='/' exact component={Home} />
+                    <Route path='/services' component={Services} />
+                    <Route path='/products' component={Products} />
+                    <Route path='/login' component={LogIn} />
+                    <Route path='/api' component={Api_Test_Unstyled} />
+                    <Route path='/sign-up' component={SignUp} />
                 </Switch>
             </Router>
         </>

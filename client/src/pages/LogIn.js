@@ -48,8 +48,7 @@ export default function LogIn() {
         <div className='login'>
             {(token) ? (
                 <div className="welcome">
-                    <h2>Welcome, <span>{user.name}</span></h2>
-                    <button onClick={Logout}>Logout</button>
+                    <h2>Welcome to the website!</h2>
                 </div>
             ) : (
                 <LoginForm setToken={setToken} error={error} />

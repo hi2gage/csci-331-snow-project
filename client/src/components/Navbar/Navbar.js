@@ -3,8 +3,16 @@ import { Link } from 'react-router-dom'
 import { Button } from '../Button/Button';
 import './Navbar.css';
 
+
+function getToken() {
+    const tokenString = sessionStorage.getItem('token');
+    const userToken = JSON.parse(tokenString);
+    return userToken?.token
+}
+
+
 function Navbar({ userStatus }) {
-    // status = false
+    
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
@@ -19,6 +27,12 @@ function Navbar({ userStatus }) {
             setButton(true)
         }
     };
+
+    const Logout = () => {
+        console.log("Logout");
+        sessionStorage.clear()
+        window.location.reload(false);
+    }
 
     useEffect(() => {
         showButton();
@@ -65,8 +79,8 @@ function Navbar({ userStatus }) {
                         </li>
                     </ul>
                     {userStatus ?
-                        (button && <Button buttonStyle='btn--outline'>LOG IN</Button>) :
-                        (button && <Button buttonStyle='btn--outline'>LOG OUT</Button>)}
+                        (button && <Button buttonStyle='btn--outline' userStatus={userStatus} onClick={Logout}>LOG OUT</Button>) :
+                        (button && <Button buttonStyle='btn--outline' userStatus={userStatus}>LOG IN</Button>)}
 
 
 
