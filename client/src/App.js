@@ -12,6 +12,7 @@ import SignUp from "./pages/SignUp";
 
 
 function App() {
+    const status = false
     const [data, setData] = React.useState(null);
 
     React.useEffect(() => {
@@ -24,7 +25,7 @@ function App() {
     return (
         <>
             <Router>
-                <Navbar/>
+                <Navbar status={true} />
                 <Switch>
                     <Route path='/' exact component={Home}/>
                     <Route path='/services' component={Services}/>
