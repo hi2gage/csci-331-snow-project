@@ -5,17 +5,18 @@ import axios from 'axios';
 
 // Converts the number into a string
 function toStringNum(time) {
+    var hour, minute = '0';
     if (time.hr < 10) {
-        var hour = '0' + time.hr.toString()
+        hour = '0' + time.hr.toString()
     }
     else {
-        var hour = time.hr.toString()
+        hour = time.hr.toString()
     }
     if (time.min < 10) {
-        var minute = '0' + time.min.toString()
+        minute = '0' + time.min.toString()
     }
     else {
-        var minute = time.min.toString()
+        minute = time.min.toString()
     }
     return { snow: time.snow, hour: hour, minute: minute };
 }

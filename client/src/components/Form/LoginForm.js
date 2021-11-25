@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import {Paper} from "@mui/material";
 import Link from "@mui/material/Link";
 import './LoginForm.css'
 
@@ -18,7 +17,7 @@ function LoginForm({Login, error}) {
             <form id="loginform" onSubmit={submitHandler}>
                 <div className="form-inner">
                     <h2>Login</h2>
-                    {((error != "") ? (<div className="error">{error}</div>) : "")}
+                    {((error !== "") ? (<div className="error">{error}</div>) : "")}
                     <div className="form-group">
                         <label htmlFor="name">Name: *</label>
                         <input required type="text" name="name" id="name"

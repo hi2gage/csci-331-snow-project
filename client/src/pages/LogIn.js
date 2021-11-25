@@ -13,7 +13,7 @@ export default function LogIn() {
 
     const Login = details => {
         console.log(details);
-        if (details.email == adminUser.email && details.password == adminUser.password) {
+        if (details.email === adminUser.email && details.password === adminUser.password) {
             console.log("Logged IN");
             setUser({
                 name: details.name,
@@ -32,7 +32,7 @@ export default function LogIn() {
 
     return (
         <div className='login'>
-            {(user.email != "") ? (
+            {(user.email !== "") ? (
                 <div className="welcome">
                     <h2>Welcome, <span>{user.name}</span></h2>
                     <button onClick={Logout}>Logout</button>
