@@ -166,9 +166,9 @@ function Timepicker(props) {
     return (
         <div className="">
             <Picker state={state} setSnow={setSnow} index={0} />
-            {/* <Picker state={state} setSnow={setSnow} index={1} />
+            <Picker state={state} setSnow={setSnow} index={1} />
             <Picker state={state} setSnow={setSnow} index={2} />
-            <Picker state={state} setSnow={setSnow} index={3} /> */}
+            <Picker state={state} setSnow={setSnow} index={3} />
 
 
             {/* Submits data to server*/}

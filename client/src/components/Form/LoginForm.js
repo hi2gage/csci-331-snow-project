@@ -32,7 +32,7 @@ function LoginForm({ Login, error, setToken }) {
         setToken(token);
         window.location.reload(false);
 
-        // Login(details);
+        Login(details);
     }
 
 
