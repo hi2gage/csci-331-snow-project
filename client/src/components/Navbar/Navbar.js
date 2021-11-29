@@ -4,12 +4,6 @@ import { Button } from '../Button/Button';
 import './Navbar.css';
 
 
-function getToken() {
-    const tokenString = sessionStorage.getItem('token');
-    const userToken = JSON.parse(tokenString);
-    return userToken?.token
-}
-
 
 function Navbar({ userStatus }) {
     

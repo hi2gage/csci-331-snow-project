@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import '../App.css';
 import SignUpForm from "../components/Form/SignUpForm";
 
-export default function SignUp() {
-
+export default function SignUp({tok}) {
+    console.log(tok)
     return (
         <div className='sign-up'>
             <SignUpForm />

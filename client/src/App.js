@@ -38,7 +38,12 @@ function App() {
                     <Route path='/products' component={Products} />
                     <Route path='/login' component={LogIn} />
                     <Route path='/api' component={Api_Test_Unstyled} />
-                    <Route path='/sign-up' component={SignUp} />
+                    <Route
+                        path='/sign-up'
+                        render={() => (
+                            <SignUp tok={"true"} />
+                        )
+                    } />
                 </Switch>
             </Router>
         </>
