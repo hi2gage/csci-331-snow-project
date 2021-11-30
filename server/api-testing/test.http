@@ -15,3 +15,31 @@ GET  http://localhost:5000/setup HTTP/1.1
 content-type: application/json
 
 ###
+
+### Correct Username and Pass
+POST  http://localhost:5000/login HTTP/1.1
+content-type: application/json
+
+{ "email": "gage@halverson.com", 
+"password": "pass" }
+###
+
+### Incorrect Username and Pass
+POST  http://localhost:5000/login HTTP/1.1
+content-type: application/json
+
+{ "email": "gage1", 
+"password": "pass1" }
+###
+
+
+
+### Register
+POST  http://localhost:5000/register HTTP/1.1
+content-type: application/json
+
+{ "first": "gage",
+"last": "halverson",
+"email": "1223", 
+"password": "password" }
+###

@@ -49,11 +49,16 @@ function Navbar({ userStatus }) {
                                 Home
                             </Link>
                         </li>
+
+
+                        {userStatus ?
+                        (
                         <li className='nav-item'>
                             <Link to='/api' className='nav-links' onClick={closeMobileMenu}>
                                 API
                             </Link>
                         </li>
+                        ) : (null)}
                         {/* <li className='nav-item'>
                             <Link to='/services' className='nav-links' onClick={closeMobileMenu}>
                                 Services

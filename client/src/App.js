@@ -37,7 +37,12 @@ function App() {
                     <Route path='/services' component={Services} />
                     <Route path='/products' component={Products} />
                     <Route path='/login' component={LogIn} />
-                    <Route path='/api' component={Api_Test_Unstyled} />
+                    
+                    {/* Allowing access to api Page */}
+                    {token ?
+                        (<Route path='/api' component={Api_Test_Unstyled} />) : (null)}
+
+                    
                     <Route
                         path='/sign-up'
                         render={() => (

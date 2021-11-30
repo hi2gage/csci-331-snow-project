@@ -14,15 +14,37 @@ import "./SignUpForm.css"
 
 const theme = createTheme();
 
+async function loginUser(info) {
+    return fetch('/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(info)
+    })
+        .then(data => data.json())
+}
+
+
+
 export default function SignUpForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         // eslint-disable-next-line no-console
-        console.log({
+
+        let userInfo = {
+            first: data.get('firstName'),
+            last: data.get('lastName'),
             email: data.get('email'),
             password: data.get('password'),
-        });
+        }
+        loginUser(userInfo)
+
+
+        console.log(userInfo);
+
+
     };
 
     return (

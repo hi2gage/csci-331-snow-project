@@ -1,5 +1,7 @@
 // const e = require("express");
 const { Pool, Client } = require("pg");
+const bcrypt = require("bcrypt");
+
 
 const credentials = {
     user: "postgres",
@@ -56,7 +58,7 @@ async function setAll(times) {
     // var sql = 'INSERT INTO times(snow, hr, min) VALUES("0-3", 99, 30), ("4-7", 7, 00), ("8-11", 6, 30), ("11+", 6, 00);';
 
     console.log("From SetAll");
-    client.query(sql, times, function(err, rows, fields){});
+    client.query(sql, times, function (err, rows, fields) { });
     const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
     client.end()
 
@@ -75,11 +77,29 @@ async function setupDb() {
     await client.query('DROP TABLE IF EXISTS "times";');
     await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
 
+    await client.query('DROP TABLE IF EXISTS "users";');
+    await client.query('CREATE TABLE users (id serial PRIMARY KEY, ' +
+        'first VARCHAR(25), ' +
+        'last VARCHAR(25), ' +
+        'email VARCHAR(50), ' +
+        'password VARCHAR(200));');
 
-    client.query("INSERT INTO times(snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
+    const salt = await bcrypt.genSalt(10);
+    const pass = await bcrypt.hash("pass", salt);
+
+
+    let sql = "INSERT INTO users (first, last, email, password) VALUES ('gage', 'halverson', 'gage@halverson.com', $1);"
+    client.query(sql, [pass]);
+
+
+    client.query("INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
     const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
-    client.end()
 
+
+
+
+
+    client.end()
     return now;
 
 
