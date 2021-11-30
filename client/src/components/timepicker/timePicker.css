@@ -1,0 +1,64 @@
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+#root {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.timePickerPage {
+    background-image: url("https://wallpaperaccess.com/full/959907.jpg");
+    height: 100%;
+    background-size: cover;
+}
+
+.timePickerComponent {
+    display: flex;
+    flex-direction: column;
+}
+
+.time-picker {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 30px;
+}
+
+.snowRange {
+display: grid;
+}
+
+#hourRange {
+    width: 10%;
+}
+
+#tableLabels {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 50px;
+}
+
+.submitDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.resetDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.timePickerDiv {
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 10%;
+    opacity: 80%;
+}

@@ -43,8 +43,7 @@ function LoginForm({ Login, error, setToken }) {
             <form id="loginform" onSubmit={submitHandler}>
                 <div className="form-inner">
                     <h2>Login</h2>
-                    {((error != "") ? (<div className="error">{error}</div>) : "")}
-
+                    {((error !== "") ? (<div className="error">{error}</div>) : "")}
                     <div className="form-group">
                         <label htmlFor="email">Email: *</label>
                         <input required type="text" name="email" id="email"
@@ -63,10 +62,6 @@ function LoginForm({ Login, error, setToken }) {
             </form>
         </div>
     )
-}
-
-LoginForm.propTypes = {
-    setToken: PropTypes.func.isRequired
 }
 
 export default LoginForm;
