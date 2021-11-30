@@ -6,6 +6,7 @@ require("dotenv").config();
 
 var dbAcess = require("./database/dbAccess");
 var auth = require("./auth/login")
+var reg = require("./auth/register")
 
 const { Pool, Client } = require("pg");
 
@@ -135,15 +136,19 @@ app.use('/login', (req, res) => {
 
 app.use('/register', (req, res) => {
     console.log(req.body)
+
+
+    let register = reg.register(req.body)
+
     if (req.body.email === 'gage' && req.body.password === 'pass') {
         console.log("correct password and username")
         res.send({
-            token: 'test123'
+            result: "Success"
         });
     }
     else {
         res.send({
-            error: "Failed to Login"
+            error: "Failure"
         });
     }
 

@@ -1,5 +1,7 @@
 // const e = require("express");
 const { Pool, Client } = require("pg");
+const bcrypt = require("bcrypt");
+
 
 const credentials = {
     user: "postgres",
@@ -80,10 +82,14 @@ async function setupDb() {
         'first VARCHAR(25), ' +
         'last VARCHAR(25), ' +
         'email VARCHAR(50), ' +
-        'password VARCHAR(25));');
+        'password VARCHAR(200));');
+
+    const salt = await bcrypt.genSalt(10);
+    const pass = await bcrypt.hash("pass", salt);
 
 
-    client.query("INSERT INTO users (first, last, email, password) VALUES('John', 'Smith', 'John@smith.com', 'smithypass'), ('gage', 'halverson', 'gage@halverson.com', 'pass');");
+    let sql = "INSERT INTO users (first, last, email, password) VALUES ('gage', 'halverson', 'gage@halverson.com', $1);"
+    client.query(sql, [pass]);
 
 
     client.query("INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");

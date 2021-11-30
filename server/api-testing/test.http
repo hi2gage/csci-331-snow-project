@@ -20,7 +20,7 @@ content-type: application/json
 POST  http://localhost:5000/login HTTP/1.1
 content-type: application/json
 
-{ "email": "gage", 
+{ "email": "gage@halverson.com", 
 "password": "pass" }
 ###
 
@@ -29,5 +29,17 @@ POST  http://localhost:5000/login HTTP/1.1
 content-type: application/json
 
 { "email": "gage1", 
-"password": "pass" }
+"password": "pass1" }
+###
+
+
+
+### Register
+POST  http://localhost:5000/register HTTP/1.1
+content-type: application/json
+
+{ "first": "gage",
+"last": "halverson",
+"email": "1223", 
+"password": "password" }
 ###

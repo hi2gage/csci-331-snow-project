@@ -1,4 +1,5 @@
 const { Pool, Client } = require("pg");
+const bcrypt = require("bcrypt");
 
 const credentials = {
     user: "postgres",
@@ -17,7 +18,8 @@ async function checkAuth(body) {
                 resolve(false)
             }
             else {
-                if (user[0].password == body.password) {
+                const validPassword = bcrypt.compare(body.password, user[0].password);
+                if (validPassword) {
                     console.log("Correct login")
                     resolve(true)
                 }
@@ -43,11 +45,10 @@ async function getUser(email) {
         var sql = "SELECT * FROM users WHERE email = ANY ($1) ORDER BY id ASC;";
         const user = await client.query(sql, [[email]]);
         await client.end();
-
+        console.log(user.rows)
         return user.rows;
 
-
-
+    // TODO: Need to figure this out for connecting to the database for HEROKU
     } else {
         console.log("We are on Heroku");
         const client = new Client({
