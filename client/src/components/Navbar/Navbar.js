@@ -25,7 +25,7 @@ function Navbar({ userStatus }) {
     const Logout = () => {
         console.log("Logout");
         sessionStorage.clear()
-        window.location.reload(false);
+        // window.location.reload(false);
     }
 
     useEffect(() => {
@@ -70,16 +70,22 @@ function Navbar({ userStatus }) {
                                 Products
                             </Link>
                         </li> */}
-
+                        {!userStatus ?
+                        (
                         <li className='nav-item'>
                             <Link to='/login' className='nav-links' onClick={closeMobileMenu}>
                                 Log In
                             </Link>
                         </li>
+                        ) : (
+                            <Link to='/' className='nav-links' onClick={Logout}>
+                                Log out
+                            </Link>
+                        )}
                     </ul>
-                    {userStatus ?
+                    {/* {userStatus ?
                         (button && <Button buttonStyle='btn--outline' userStatus={userStatus} onClick={Logout}>LOG OUT</Button>) :
-                        (button && <Button buttonStyle='btn--outline' userStatus={userStatus}>LOG IN</Button>)}
+                        (button && <Button buttonStyle='btn--outline' userStatus={userStatus}>LOG IN</Button>)} */}
 
 
 
