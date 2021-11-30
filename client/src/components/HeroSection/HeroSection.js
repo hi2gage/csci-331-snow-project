@@ -8,7 +8,7 @@ function HeroSection() {
         <div className='hero-container'>
             <video src="/videos/snowvid.mp4" autoPlay loop muted />
             <h1>SHREDDING POW</h1>
-            <p>What are you waiting for?</p>
+            <p>Start your alarm clock adventure</p>
             <div className='hero-btns'>
                 <Button className='btns' buttonStyle='btn--outline' buttonSize='btn--large'>GET STARTED</Button>
                 {/* <Button className='btns' buttonStyle='btn--primary' buttonSize='btn--large'>Watch A Dope Vid <i className='far fa-play-circle' /></Button> */}

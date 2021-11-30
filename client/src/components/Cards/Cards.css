@@ -28,7 +28,7 @@ h1 {
 .cards__item {
   display: flex;
   flex: 1;
-  margin: 0 1rem;
+  margin: 0 8rem;
   border-radius: 10px;
 }
 
@@ -39,7 +39,7 @@ h1 {
   box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
   -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
   filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
-  border-radius: 10px;
+  border-radius: 100px;
   overflow: hidden;
   text-decoration: none;
 }
@@ -68,6 +68,7 @@ h1 {
   color: #fff;
   background-color: gray;
   box-sizing: border-box;
+  border-radius: 100px;
 }
 
 .cards__item__img {

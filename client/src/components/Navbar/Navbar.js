@@ -60,14 +60,14 @@ function Navbar({ userStatus }) {
                             </Link>
                         </li> */}
 
-                        <li className='nav-item'>
+                        {/* <li className='nav-item'>
                             <Link to='/products' className='nav-links' onClick={closeMobileMenu}>
                                 Products
                             </Link>
-                        </li>
+                        </li> */}
 
                         <li className='nav-item'>
-                            <Link to='/login' className='nav-links-mobile' onClick={closeMobileMenu}>
+                            <Link to='/login' className='nav-links' onClick={closeMobileMenu}>
                                 Log In
                             </Link>
                         </li>
