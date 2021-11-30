@@ -1,7 +1,9 @@
 import '../../App.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
 
 // Converts the number into a string
 function toStringNum(time) {
@@ -86,52 +88,60 @@ function Picker({ state, setSnow, index }) {
                 </div>
 
             {/* TODO: Format the hour selector */}
-            <div className="snowRange">
-                    {/*<label className="hourLabel">Hour</label>*/}
-                    <select hour={state[index].hour}
+            <FormControl variant="standard">
+                <div className="snowRange" id="hourRange">
+                    <Select
+                        hour={state[index].hour}
                         value={state[index].hour}
                         defaultValue={state[index].hour}
                         onChange={e => updateHour(e)}
-                        className="hourSelect">
-                        <option hour="00">00</option>
-                        <option hour="01">01</option>
-                        <option hour="02">02</option>
-                        <option hour="03">03</option>
-                        <option hour="04">04</option>
-                        <option hour="05">05</option>
-                        <option hour="06">06</option>
-                        <option hour="07">07</option>
-                        <option hour="08">08</option>
-                        <option hour="09">09</option>
-                        <option hour="10">10</option>
-                        <option hour="11">10</option>
-                        <option hour="12">12</option>
-                    </select>
-            </div>
+                        className="hourSelect"
+                    >
+                        <MenuItem value="00">00</MenuItem>
+                        <MenuItem value="01">01</MenuItem>
+                        <MenuItem value="02">02</MenuItem>
+                        <MenuItem value="03">03</MenuItem>
+                        <MenuItem value="04">04</MenuItem>
+                        <MenuItem value="05">05</MenuItem>
+                        <MenuItem value="06">06</MenuItem>
+                        <MenuItem value="07">07</MenuItem>
+                        <MenuItem value="08">08</MenuItem>
+                        <MenuItem value="09">09</MenuItem>
+                        <MenuItem value="10">10</MenuItem>
+                        <MenuItem value="11">11</MenuItem>
+                        <MenuItem value="12">12</MenuItem>
+                    </Select>
+                </div>
+            </FormControl>
 
 
             {/* TODO: Format the minute selector */}
             <div class="snowRange">
-                    {/*<label className="minuteLabel">Minute</label>*/}
-                    <select minute={state[index].minute}
-                        value={state[index].minute}
-                        defaultValue={state[index].minute}
-                        onChange={e => updateMin(e)}
-                        className="minuteSelect">
-                        <option minute="00">00</option>
-                        <option minute="05">05</option>
-                        <option minute="10">10</option>
-                        <option minute="15">15</option>
-                        <option minute="20">20</option>
-                        <option minute="25">25</option>
-                        <option minute="30">30</option>
-                        <option minute="35">35</option>
-                        <option minute="40">40</option>
-                        <option minute="45">45</option>
-                        <option minute="50">50</option>
-                        <option minute="55">55</option>
-                    </select>
-                </div>
+                <FormControl variant="standard">
+                    <div className="snowRange" id="hourRange">
+                        <Select
+                            minute={state[index].minute}
+                            value={state[index].minute}
+                            defaultValue={state[index].minute}
+                            onChange={e => updateMin(e)}
+                            className="minuteSelect"
+                        >
+                            <MenuItem value="00">00</MenuItem>
+                            <MenuItem value="05">05</MenuItem>
+                            <MenuItem value="10">10</MenuItem>
+                            <MenuItem value="15">15</MenuItem>
+                            <MenuItem value="20">20</MenuItem>
+                            <MenuItem value="25">25</MenuItem>
+                            <MenuItem value="30">30</MenuItem>
+                            <MenuItem value="35">35</MenuItem>
+                            <MenuItem value="40">40</MenuItem>
+                            <MenuItem value="45">45</MenuItem>
+                            <MenuItem value="50">50</MenuItem>
+                            <MenuItem value="55">55</MenuItem>
+                        </Select>
+                    </div>
+                </FormControl>
+            </div>
         </form>
     )
 }
