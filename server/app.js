@@ -5,6 +5,7 @@ var cors = require("cors");
 require("dotenv").config();
 
 var dbAcess = require("./database/dbAccess");
+var auth = require("./auth/login")
 
 const { Pool, Client } = require("pg");
 
@@ -110,14 +111,46 @@ app.get("/setup", (req, res) => {
 
 app.use('/login', (req, res) => {
     console.log(req.body)
+    console.log("-------------")
+
+    let checker = auth.checkAuth(req.body)
+    checker.then(result => {
+        if(result) {
+            console.log("correct password and username")
+            res.send({
+                token: 'test123'
+            });
+        }
+        else {
+            res.status(400).json({
+                error: "User is not registered, Sign Up first",
+            });
+            
+        }
+    })
+
+    
+
+});
+
+app.use('/register', (req, res) => {
+    console.log(req.body)
     if (req.body.email === 'gage' && req.body.password === 'pass') {
         console.log("correct password and username")
         res.send({
             token: 'test123'
         });
     }
+    else {
+        res.send({
+            error: "Failed to Login"
+        });
+    }
 
 });
+
+
+
 
 app.put("/api", (req, res) => {
     res.setHeader("Content-Type", "text/plain");
