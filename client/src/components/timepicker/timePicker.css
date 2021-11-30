@@ -59,4 +59,6 @@ display: grid;
 .timePickerDiv {
     padding-left: 20%;
     padding-right: 20%;
+    padding-top: 10%;
+    opacity: 80%;
 }
