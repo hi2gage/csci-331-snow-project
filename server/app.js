@@ -90,7 +90,7 @@ app.post("/apidb", (req, res) => {
         var sql = 'INSERT INTO times(snow, hr, min) VALUES("0-3", 99, 30), ("4-7", 7, 00), ("8-11", 6, 30), ("11+", 6, 00);';
 
 
-        client.query(sql, function(err, rows, fields){});
+        client.query(sql, function (err, rows, fields) { });
         client.end();
         res.send("testing");
     }
@@ -108,7 +108,16 @@ app.get("/setup", (req, res) => {
     });
 });
 
+app.use('/login', (req, res) => {
+    console.log(req.body)
+    if (req.body.email === 'gage' && req.body.password === 'pass') {
+        console.log("correct password and username")
+        res.send({
+            token: 'test123'
+        });
+    }
 
+});
 
 app.put("/api", (req, res) => {
     res.setHeader("Content-Type", "text/plain");
