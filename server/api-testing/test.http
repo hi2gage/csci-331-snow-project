@@ -40,6 +40,6 @@ content-type: application/json
 
 { "first": "gage",
 "last": "halverson",
-"email": "1223", 
-"password": "password" }
+"email": "gage", 
+"password": "pass" }
 ###

@@ -36,6 +36,10 @@ app.get("/api", (req, res) => {
     res.json({ hour: "00", minute: "00", snow: 0 });
 });
 
+
+
+
+
 // Getter
 app.get("/apidb", (req, res) => {
 
@@ -56,6 +60,11 @@ app.get("/apidb", (req, res) => {
         });
 
         client.connect();
+
+        await client.query('DROP TABLE IF EXISTS "times";');
+        await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
+
+        var sql = "INSERT INTO times(snow, hr, min) VALUES('0-3', $1, $2), ('4-7', $3, $4), ('8-11', $5, $6), ('11+', $7, $8);";
 
         const now = client.query("SELECT * FROM times ORDER BY id ASC;");
         client.end();
@@ -89,10 +98,8 @@ app.post("/apidb", (req, res) => {
         client.query('DROP TABLE IF EXISTS "times";');
         client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
 
-        var sql = 'INSERT INTO times(snow, hr, min) VALUES("0-3", 99, 30), ("4-7", 7, 00), ("8-11", 6, 30), ("11+", 6, 00);';
+        client.query("INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
 
-
-        client.query(sql, function (err, rows, fields) { });
         client.end();
         res.send("testing");
     }
@@ -116,7 +123,7 @@ app.use('/login', (req, res) => {
 
     let checker = auth.checkAuth(req.body)
     checker.then(result => {
-        if(result) {
+        if (result) {
             console.log("correct password and username")
             res.send({
                 token: 'test123'
@@ -126,11 +133,11 @@ app.use('/login', (req, res) => {
             res.status(400).json({
                 error: "User is not registered, Sign Up first",
             });
-            
+
         }
     })
 
-    
+
 
 });
 
