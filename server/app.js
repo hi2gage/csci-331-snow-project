@@ -62,7 +62,7 @@ app.get("/apidb", (req, res) => {
         client.connect();
 
         let now = client.query("SELECT * FROM times ORDER BY id ASC;").then(() => client.end());;
-        res.send(JSON.stringify(now, null, "  "));
+        res.send(now);
     }
 });
 
