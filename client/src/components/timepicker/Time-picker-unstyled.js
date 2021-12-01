@@ -158,7 +158,7 @@ function Timepicker(props) {
 
     // POST method to push the current state of the selectors back to the server
     const postToApi = () => {
-        axios.post('/apidb', toIntArray(state))
+        axios.post('https://csci-331-snow-project.herokuapp.com/apidb', toIntArray(state))
             .then(response => {
                 console.log("I just send a POST")
                 const info = response;

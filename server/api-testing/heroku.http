@@ -23,3 +23,14 @@ content-type: application/json
 { "email": "gage1", 
 "password": "pass1" }
 ###
+
+
+### Register
+POST  https://csci-331-snow-project.herokuapp.com/register HTTP/1.1
+content-type: application/json
+
+{ "first": "gage",
+"last": "halverson",
+"email": "tes", 
+"password": "pass" }
+###

@@ -12,8 +12,6 @@ const credentials = {
 };
 
 async function getAll() {
-
-
     if (process.env.LOCAL_OR_HEROKU == "local") {
         console.log("Hit the API Locally");
         const client = new Client(credentials);
@@ -48,24 +46,51 @@ async function getAll() {
 }
 
 async function setAll(times) {
-    console.log("Setting Up the database.");
+    if (process.env.LOCAL_OR_HEROKU == "local") {
+        console.log("setting time values locally")
 
-    const client = new Client(credentials);
-    await client.connect();
+        const client = new Client(credentials);
+        await client.connect();
 
-    await client.query('DROP TABLE IF EXISTS "times";');
-    await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
+        await client.query('DROP TABLE IF EXISTS "times";');
+        await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
 
-    var sql = "INSERT INTO times(snow, hr, min) VALUES('0-3', $1, $2), ('4-7', $3, $4), ('8-11', $5, $6), ('11+', $7, $8);";
-    // var sql = 'INSERT INTO times(snow, hr, min) VALUES("0-3", 99, 30), ("4-7", 7, 00), ("8-11", 6, 30), ("11+", 6, 00);';
+        var sql = "INSERT INTO times(snow, hr, min) VALUES('0-3', $1, $2), ('4-7', $3, $4), ('8-11', $5, $6), ('11+', $7, $8);";
+        // var sql = 'INSERT INTO times(snow, hr, min) VALUES("0-3", 99, 30), ("4-7", 7, 00), ("8-11", 6, 30), ("11+", 6, 00);';
 
-    console.log("From SetAll");
-    client.query(sql, times, function (err, rows, fields) { });
-    const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
-    client.end()
+        console.log("From SetAll");
+        client.query(sql, times, function (err, rows, fields) { });
+        const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
+        client.end()
 
 
-    return now;
+        return now;
+    }
+    else {
+        console.log("setting time values on Heroku")
+        const client = new Client({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false,
+            },
+        });
+
+        await client.connect();
+
+        await client.query('DROP TABLE IF EXISTS "times";');
+        await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
+
+        var sql = "INSERT INTO times(snow, hr, min) VALUES('0-3', $1, $2), ('4-7', $3, $4), ('8-11', $5, $6), ('11+', $7, $8);";
+        // var sql = 'INSERT INTO times(snow, hr, min) VALUES("0-3", 99, 30), ("4-7", 7, 00), ("8-11", 6, 30), ("11+", 6, 00);';
+
+        console.log("From SetAll");
+        client.query(sql, times, function (err, rows, fields) { });
+        const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
+        client.end()
+
+
+        return now;
+    }
 
 }
 
