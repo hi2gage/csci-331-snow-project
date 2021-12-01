@@ -25,9 +25,8 @@ async function getAll() {
         await client.end();
 
         return now;
-
-
-    } else {
+    }
+    else {
         console.log("Hit the API on Heroku");
         const client = new Client({
             connectionString: process.env.DATABASE_URL,
@@ -45,7 +44,6 @@ async function getAll() {
         await client.end();
 
         return now;
-
     }
 }
 
@@ -73,38 +71,74 @@ async function setAll(times) {
 
 
 async function setupDb() {
-    console.log("Setting Up the database.");
 
-    const client = new Client(credentials);
-    await client.connect();
+    if (process.env.LOCAL_OR_HEROKU == "local") {
+        console.log("Setting Up the database locally");
 
-    await client.query('DROP TABLE IF EXISTS "times";');
-    await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
+        const client = new Client(credentials);
+        await client.connect();
 
-    await client.query('DROP TABLE IF EXISTS "users";');
-    await client.query('CREATE TABLE users (id serial PRIMARY KEY, ' +
-        'first VARCHAR(25), ' +
-        'last VARCHAR(25), ' +
-        'email VARCHAR(50), ' +
-        'password VARCHAR(200));');
+        await client.query('DROP TABLE IF EXISTS "times";');
+        await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
 
-    const salt = await bcrypt.genSalt(10);
-    const pass = await bcrypt.hash("pass", salt);
+        await client.query('DROP TABLE IF EXISTS "users";');
+        await client.query('CREATE TABLE users (id serial PRIMARY KEY, ' +
+            'first VARCHAR(25), ' +
+            'last VARCHAR(25), ' +
+            'email VARCHAR(50), ' +
+            'password VARCHAR(200));');
 
-
-    let sql = "INSERT INTO users (first, last, email, password) VALUES ('gage', 'halverson', 'gage@halverson.com', $1);"
-    client.query(sql, [pass]);
+        const salt = await bcrypt.genSalt(10);
+        const pass = await bcrypt.hash("pass", salt);
 
 
-    client.query("INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
-    const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
+        let sql = "INSERT INTO users (first, last, email, password) VALUES ('gage', 'halverson', 'gage@halverson.com', $1);"
+        client.query(sql, [pass]);
 
 
+        client.query("INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
+        const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
+
+        client.end()
+        return now;
+    }
+    else {
+        console.log("Setting Up the database on Heroku");
+
+        const client = new Client({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false,
+            },
+        });
 
 
+        await client.connect();
 
-    client.end()
-    return now;
+        await client.query('DROP TABLE IF EXISTS "times";');
+        await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
+
+        await client.query('DROP TABLE IF EXISTS "users";');
+        await client.query('CREATE TABLE users (id serial PRIMARY KEY, ' +
+            'first VARCHAR(25), ' +
+            'last VARCHAR(25), ' +
+            'email VARCHAR(50), ' +
+            'password VARCHAR(200));');
+
+        const salt = await bcrypt.genSalt(10);
+        const pass = await bcrypt.hash("pass", salt);
+
+
+        let sql = "INSERT INTO users (first, last, email, password) VALUES ('gage', 'halverson', 'gage@halverson.com', $1);"
+        client.query(sql, [pass]);
+
+
+        client.query("INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
+        const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
+
+        client.end()
+        return now;
+    }
 
 
 }
