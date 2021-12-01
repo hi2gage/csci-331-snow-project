@@ -61,11 +61,7 @@ app.get("/apidb", (req, res) => {
 
         client.connect();
 
-        let now = client.query('DROP TABLE IF EXISTS "times";' + 
-        'CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);' +
-
-        "INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);"
-        + "SELECT * FROM times ORDER BY id ASC;").then(() => client.end());;
+        let now = client.query("SELECT * FROM times ORDER BY id ASC;").then(() => client.end());;
         res.send(JSON.stringify(now, null, "  "));
     }
 });
