@@ -51,22 +51,9 @@ app.get("/apidb", (req, res) => {
         });
 
     } else {
-        console.log("We are on Heroku");
-        const client = new Client({
-            connectionString: process.env.DATABASE_URL,
-            ssl: {
-                rejectUnauthorized: false,
-            },
-        });
-
-        client.connect();
-        client.query('SELECT * FROM times ORDER BY id ASC;', (err, dbRes) => {
-            if (err) throw err;
-            for (let row of dbRes.rows) {
-                console.log(JSON.stringify(row));
-            }
-            client.end();
-            res.send(dbRes.rows)
+        dbAcess.getAll().then((data) => {
+            // console.log(JSON.stringify(data.rows, null, "  "))
+            res.send(data.rows);
         });
     }
 });

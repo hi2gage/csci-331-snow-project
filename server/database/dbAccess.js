@@ -36,11 +36,15 @@ async function getAll() {
             },
         });
 
-        await client.connect();
-
-        const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
-        await client.end();
-        return now;
+        client.connect();
+        client.query('SELECT * FROM times ORDER BY id ASC;', (err, dbRes) => {
+            if (err) throw err;
+            for (let row of dbRes.rows) {
+                console.log(JSON.stringify(row));
+            }
+            client.end();
+            res.send(dbRes.rows)
+        });
 
     }
 }
