@@ -43,7 +43,7 @@ async function getAll() {
                 console.log(JSON.stringify(row));
             }
             client.end();
-            res.send(dbRes.rows)
+            return (dbRes)
         });
 
     }
