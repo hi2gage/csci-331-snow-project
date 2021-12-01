@@ -37,7 +37,7 @@ async function checkAuth(body) {
 
 async function getUser(email) {
     if (process.env.LOCAL_OR_HEROKU == "local") {
-        console.log("Hit the API");
+        console.log("Getting user by email locally");
         const client = new Client(credentials);
         await client.connect();
 
@@ -50,7 +50,7 @@ async function getUser(email) {
 
     // TODO: Need to figure this out for connecting to the database for HEROKU
     } else {
-        console.log("We are on Heroku");
+        console.log("Getting user by email locally on Heroku");
         const client = new Client({
             connectionString: process.env.DATABASE_URL,
             ssl: {
@@ -60,9 +60,12 @@ async function getUser(email) {
 
         await client.connect();
 
-        const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
+        console.log(email)
+        var sql = "SELECT * FROM users WHERE email = ANY ($1) ORDER BY id ASC;";
+        const user = await client.query(sql, [[email]]);
         await client.end();
-        return now;
+        console.log(user.rows)
+        return user.rows;
 
     }
 
