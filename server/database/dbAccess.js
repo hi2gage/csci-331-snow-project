@@ -47,6 +47,9 @@ async function getAll() {
         // });
 
         const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
+        for (let row of now.rows) {
+            console.log(JSON.stringify(row));
+        }
         await client.end();
 
         return now;
