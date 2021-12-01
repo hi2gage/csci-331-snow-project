@@ -50,35 +50,10 @@ app.get("/apidb", (req, res) => {
 
 // Poster
 app.post("/apidb", (req, res) => {
-    console.log(req.body);
-    if (process.env.LOCAL_OR_HEROKU == "local") {
-        dbAcess.setAll(req.body).then((data) => {
-
-
-            console.log(req.body);
-            // res.send(data.rows);
-            res.send(data.rows);
-        });
-
-    } else {
-        console.log("We are on Heroku");
-        const client = new Client({
-            connectionString: process.env.DATABASE_URL,
-            ssl: {
-                rejectUnauthorized: false,
-            },
-        });
-
-        client.connect();
-
-        client.query('DROP TABLE IF EXISTS "times";');
-        client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
-
-        client.query("INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
-
-        client.end();
-        res.send("testing");
-    }
+    dbAcess.setAll(req.body).then((data) => {
+        console.log(req.body);
+        res.send(data.rows);
+    });
 });
 
 
