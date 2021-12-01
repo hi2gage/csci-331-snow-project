@@ -52,8 +52,8 @@ app.get("/apidb", (req, res) => {
 
     } else {
         dbAcess.getAll().then((data) => {
-            // console.log(JSON.stringify(data.rows, null, "  "))
-            res.send(data.rows);
+            console.log(JSON.stringify(data.rows, null, "  "))
+            res.send(data);
         });
     }
 });
