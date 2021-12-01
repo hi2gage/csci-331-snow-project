@@ -29,30 +29,56 @@ async function register(body) {
 }
 
 async function createUser(userInfo) {
-    console.log("Hit the API");
-    const client = new Client(credentials);
-    await client.connect();
 
-    const salt = await bcrypt.genSalt(10);
-    const pass = await bcrypt.hash(userInfo.password, salt);
-    const values = [userInfo.first, userInfo.last, userInfo.email, pass]
+    if (process.env.LOCAL_OR_HEROKU == "local") {
+        console.log("Creating new user locally");
+        const client = new Client(credentials);
+        await client.connect();
 
-    let sql = "INSERT INTO users (first, last, email, password) VALUES($1, $2, $3, $4);"
+        const salt = await bcrypt.genSalt(10);
+        const pass = await bcrypt.hash(userInfo.password, salt);
+        const values = [userInfo.first, userInfo.last, userInfo.email, pass]
 
-    console.log(values)
-    let user = await client.query(sql, values);
-    await client.end();
-    console.log(user.rows)
+        let sql = "INSERT INTO users (first, last, email, password) VALUES($1, $2, $3, $4);"
+
+        console.log(values)
+        let user = await client.query(sql, values);
+        await client.end();
+        console.log(user.rows)
+    }
+    else {
+        console.log("Creating new user on Heroku");
+
+        const client = new Client({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false,
+            },
+        });
+
+        await client.connect();
+
+        const salt = await bcrypt.genSalt(10);
+        const pass = await bcrypt.hash(userInfo.password, salt);
+        const values = [userInfo.first, userInfo.last, userInfo.email, pass]
+
+        let sql = "INSERT INTO users (first, last, email, password) VALUES($1, $2, $3, $4);"
+
+        console.log(values)
+        let user = await client.query(sql, values);
+        await client.end();
+        console.log(user.rows)
+    }
 
 
 
 
-    
+
 }
 
 async function getUser(email) {
     if (process.env.LOCAL_OR_HEROKU == "local") {
-        console.log("Hit the API");
+        console.log("Getting user by email locally");
         const client = new Client(credentials);
         await client.connect();
 
@@ -64,8 +90,9 @@ async function getUser(email) {
         return user.rows;
 
         // TODO: Need to figure this out for connecting to the database for HEROKU
-    } else {
-        console.log("We are on Heroku");
+    }
+    else {
+        console.log("Getting user by email on Heroku");
         const client = new Client({
             connectionString: process.env.DATABASE_URL,
             ssl: {
@@ -75,9 +102,12 @@ async function getUser(email) {
 
         await client.connect();
 
-        const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
+        console.log(email)
+        var sql = "SELECT * FROM users WHERE email = ANY ($1) ORDER BY id ASC;";
+        const user = await client.query(sql, [[email]]);
         await client.end();
-        return now;
+        console.log(user.rows)
+        return user.rows;
 
     }
 

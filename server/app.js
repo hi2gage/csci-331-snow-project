@@ -40,22 +40,12 @@ app.get("/api", (req, res) => {
 
 
 
-// Getter
+// Gets all of the times from the database
 app.get("/apidb", (req, res) => {
     dbAcess.getAll().then((data) => {
-        // console.log(JSON.stringify(data.rows, null, "  "))
         res.send(data.rows);
 
     });
-    // if (process.env.LOCAL_OR_HEROKU == "local") {
-
-
-    // } else {
-    //     dbAcess.getAll().then((data) => {
-    //         // console.log(JSON.stringify(data.rows, null, "  "))
-    //         res.send(data.rows);
-    //     });
-    // }
 });
 
 // Poster

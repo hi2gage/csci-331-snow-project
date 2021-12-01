@@ -50,7 +50,7 @@ async function getUser(email) {
 
     // TODO: Need to figure this out for connecting to the database for HEROKU
     } else {
-        console.log("Getting user by email locally on Heroku");
+        console.log("Getting user by email on Heroku");
         const client = new Client({
             connectionString: process.env.DATABASE_URL,
             ssl: {

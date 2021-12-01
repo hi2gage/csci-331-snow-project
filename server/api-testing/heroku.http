@@ -1,2 +1,25 @@
-GET   https://csci-331-snow-project.herokuapp.com/api HTTP/1.1
+GET   https://csci-331-snow-project.herokuapp.com/apidb HTTP/1.1
 content-type: application/json
+###
+
+
+GET   https://csci-331-snow-project.herokuapp.com/setup HTTP/1.1
+content-type: application/json
+###
+
+
+### Correct Username and Pass
+POST  https://csci-331-snow-project.herokuapp.com/login HTTP/1.1
+content-type: application/json
+
+{ "email": "gage@halverson.com", 
+"password": "pass" }
+###
+
+### Incorrect Username and Pass
+POST  https://csci-331-snow-project.herokuapp.com/login HTTP/1.1
+content-type: application/json
+
+{ "email": "gage1", 
+"password": "pass1" }
+###
