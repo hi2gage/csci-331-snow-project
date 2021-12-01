@@ -15,7 +15,7 @@ async function getAll() {
 
 
     if (process.env.LOCAL_OR_HEROKU == "local") {
-        console.log("Hit the API");
+        console.log("Hit the API Locally");
         const client = new Client(credentials);
         await client.connect();
         const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
@@ -28,7 +28,7 @@ async function getAll() {
 
 
     } else {
-        console.log("We are on Heroku");
+        console.log("Hit the API on Heroku");
         const client = new Client({
             connectionString: process.env.DATABASE_URL,
             ssl: {
@@ -37,19 +37,11 @@ async function getAll() {
         });
 
         await client.connect();
-        // client.query('SELECT * FROM times ORDER BY id ASC;', (err, dbRes) => {
-        //     if (err) throw err;
-        //     for (let row of dbRes.rows) {
-        //         console.log(JSON.stringify(row));
-        //     }
-        //     await client.end();
-        //     return (dbRes)
-        // });
 
         const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
-        for (let row of now.rows) {
-            console.log(JSON.stringify(row));
-        }
+        // for (let row of now.rows) {
+        //     console.log(JSON.stringify(row));
+        // }
         await client.end();
 
         return now;
