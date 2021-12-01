@@ -60,9 +60,13 @@ app.get("/apidb", (req, res) => {
         });
 
         client.connect();
-
-        let now = client.query("SELECT * FROM times ORDER BY id ASC;").then(() => client.end());;
-        res.send(now);
+        client.query('SELECT * FROM times ORDER BY id ASC;', (err, res) => {
+            if (err) throw err;
+            for (let row of res.rows) {
+                console.log(JSON.stringify(row));
+            }
+            client.end();
+        });
     }
 });
 
