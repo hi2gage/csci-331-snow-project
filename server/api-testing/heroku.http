@@ -1,2 +1,2 @@
-GET   https://csci-331-snow-project.herokuapp.com/apidb HTTP/1.1
+GET   https://csci-331-snow-project.herokuapp.com/api HTTP/1.1
 content-type: application/json
