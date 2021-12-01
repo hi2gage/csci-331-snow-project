@@ -36,15 +36,20 @@ async function getAll() {
             },
         });
 
-        client.connect();
-        client.query('SELECT * FROM times ORDER BY id ASC;', (err, dbRes) => {
-            if (err) throw err;
-            for (let row of dbRes.rows) {
-                console.log(JSON.stringify(row));
-            }
-            client.end();
-            return (dbRes)
-        });
+        await client.connect();
+        // client.query('SELECT * FROM times ORDER BY id ASC;', (err, dbRes) => {
+        //     if (err) throw err;
+        //     for (let row of dbRes.rows) {
+        //         console.log(JSON.stringify(row));
+        //     }
+        //     await client.end();
+        //     return (dbRes)
+        // });
+
+        const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
+        await client.end();
+
+        return now;
 
     }
 }

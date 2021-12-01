@@ -52,7 +52,7 @@ app.get("/apidb", (req, res) => {
 
     } else {
         dbAcess.getAll().then((data) => {
-            console.log(JSON.stringify(data.rows, null, "  "))
+            // console.log(JSON.stringify(data.rows, null, "  "))
             res.send(data);
         });
     }
