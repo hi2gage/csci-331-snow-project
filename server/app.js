@@ -108,8 +108,6 @@ app.use('/register', (req, res) => {
 });
 
 
-
-
 app.put("/api", (req, res) => {
     res.setHeader("Content-Type", "text/plain");
     res.write("you posted:\n");
@@ -123,19 +121,34 @@ app.put("/api", (req, res) => {
     console.log(data);
 });
 
-//Launch listening server on port 8080
-app.listen(process.env.PORT || 5000, function () {
-    console.log("app listening on port 5000 or whatever you like!");
-});
 
 app.get("/scrap", (req, res) => {
     const sc = scrapper
     sc.scrap().then((returnedValue) => {
         dbAcess.setScrapData(returnedValue).then((data) => {
             console.log("finished the Adding")
-    
+            res.send(data.rows)
         });
-        res.send(returnedValue)
     })
-    
 });
+
+
+app.get("/alarm", (req, res) => {
+    dbAcess.getScrapData().then((snow) => {
+        console.log("finished the Adding")
+        dbAcess.getAll(req.body).then((times) => {
+            console.log(times.rows);
+
+            res.send({times: times.rows, snow: snow.rows});
+        });
+        
+    });
+});
+
+//Launch listening server on port 8080
+app.listen(process.env.PORT || 5000, function () {
+    console.log("app listening on port 5000 or whatever you like!");
+});
+
+
+
