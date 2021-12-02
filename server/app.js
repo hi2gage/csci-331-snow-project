@@ -131,6 +131,10 @@ app.listen(process.env.PORT || 5000, function () {
 app.get("/scrap", (req, res) => {
     const sc = scrapper
     sc.scrap().then((returnedValue) => {
+        dbAcess.setScrapData(returnedValue).then((data) => {
+            console.log("finished the Adding")
+    
+        });
         res.send(returnedValue)
     })
     

@@ -220,4 +220,46 @@ async function setupDb() {
 
 }
 
-module.exports = { getAll, setupDb, setAll };
+async function setScrapData(data) {
+    let input = Object.values(data)
+    if (process.env.LOCAL_OR_HEROKU == "local") {
+        console.log("Adding scrapped Data Locally");
+
+        const client = new Client(credentials);
+        await client.connect();
+
+        let sql = `INSERT INTO snowfall_wf (date_time, overnight_Snow_in, Settled_Base_in, ` + 
+        `Total_to_Date_in, six_am_Temp_F, twentyfour_hr_Snow_in, seven_Day_Snow_in, Current_Conditions, Visibility_Wind) ` + 
+        `VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9);`
+
+
+        client.query(sql, input, function (err, rows, fields) { });
+        const now = await client.query("SELECT * FROM snowfall_WF ORDER BY id DESC LIMIT 1;");
+        client.end()
+    }
+    else {
+        console.log("Adding scrapped Data on Heroku");
+        const client = new Client({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false,
+            },
+        });
+
+        await client.connect();
+
+        let sql = `INSERT INTO snowfall_wf (date_time, overnight_Snow_in, Settled_Base_in, ` + 
+        `Total_to_Date_in, six_am_Temp_F, twentyfour_hr_Snow_in, seven_Day_Snow_in, Current_Conditions, Visibility_Wind) ` + 
+        `VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9);`
+
+
+        client.query(sql, input, function (err, rows, fields) { });
+        const now = await client.query("SELECT * FROM snowfall_WF ORDER BY id DESC LIMIT 1;");
+        client.end()
+
+
+    }
+
+}
+
+module.exports = { getAll, setupDb, setAll, setScrapData };
