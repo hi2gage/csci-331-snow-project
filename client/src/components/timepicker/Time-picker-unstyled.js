@@ -1,5 +1,5 @@
 import '../../App.css';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -35,7 +35,7 @@ function toStringArray(data) {
 function toIntNum(time) {
     var hour = parseInt(time.hour)
     var minute = parseInt(time.minute)
-    return {hour: hour, minute: minute};
+    return { hour: hour, minute: minute };
 }
 
 // converts all strings to numbers
@@ -54,8 +54,8 @@ function toIntArray(data) {
 
 // Returns the content for each individual snow levels. State, UseState function passed in
 // TODO: Still needs formating, if content needs to change please let me know
-function Picker({state, setSnow, index}) {
-
+function Picker({ state, setSnow, index }) {
+    
     // Ensures that the webpage isn't refreshed everytime the data changes
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -79,7 +79,7 @@ function Picker({state, setSnow, index}) {
 
     return (
         <form className="time-picker"
-              onSubmit={handleSubmit}>
+            onSubmit={handleSubmit}>
 
             {/* TODO: Format Snow Range */}
             <div className="snowRange">
@@ -148,6 +148,7 @@ function Picker({state, setSnow, index}) {
 }
 
 
+
 function Timepicker(props) {
 
     // Keeps track of state and entire array of different snow levels
@@ -158,8 +159,7 @@ function Timepicker(props) {
 
     // POST method to push the current state of the selectors back to the server
     const postToApi = () => {
-        console.log("submitted data");
-        axios.post('/apidb', toIntArray(state))
+        axios.post('https://csci-331-snow-project.herokuapp.com/apidb', toIntArray(state))
             .then(response => {
                 console.log("I just send a POST")
                 const info = response;
@@ -171,10 +171,10 @@ function Timepicker(props) {
     // Returns the view of the 4 pickers
     return (
         <>
-            <Picker state={state} setSnow={setSnow} index={0}/>
-            <Picker state={state} setSnow={setSnow} index={1}/>
-            <Picker state={state} setSnow={setSnow} index={2}/>
-            <Picker state={state} setSnow={setSnow} index={3}/>
+            <Picker state={state} setSnow={setSnow} index={0} />
+            <Picker state={state} setSnow={setSnow} index={1} />
+            <Picker state={state} setSnow={setSnow} index={2} />
+            <Picker state={state} setSnow={setSnow} index={3} />
 
 
             {/* Submits data to server*/}

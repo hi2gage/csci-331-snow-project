@@ -39,8 +39,7 @@ function Api_Test() {
 
 
     const getFromApi = () => {
-        console.log("reset data");
-        axios.get('/apidb')
+        axios.get('https://csci-331-snow-project.herokuapp.com/apidb')
             .then(response => {
                 // console.log(JSON.stringify(response.data, null, " "));
                 const info = response.data;
