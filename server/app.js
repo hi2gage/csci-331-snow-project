@@ -7,6 +7,7 @@ require("dotenv").config();
 var dbAcess = require("./database/dbAccess");
 var auth = require("./auth/login")
 var reg = require("./auth/register")
+var scrapper = require('./scrapper/scrapper')
 
 const { Pool, Client } = require("pg");
 
@@ -84,17 +85,12 @@ app.use('/login', (req, res) => {
             res.status(400).json({
                 error: "User is not registered, Sign Up first",
             });
-
         }
     })
-
-
-
 });
 
 app.use('/register', (req, res) => {
     console.log(req.body)
-
 
     let register = reg.register(req.body)
 
@@ -109,7 +105,6 @@ app.use('/register', (req, res) => {
             error: "Failure"
         });
     }
-
 });
 
 
@@ -131,4 +126,12 @@ app.put("/api", (req, res) => {
 //Launch listening server on port 8080
 app.listen(process.env.PORT || 5000, function () {
     console.log("app listening on port 5000 or whatever you like!");
+});
+
+app.get("/scrap", (req, res) => {
+    const sc = scrapper
+    sc.scrap().then((returnedValue) => {
+        res.send(returnedValue)
+    })
+    
 });
