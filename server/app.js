@@ -61,8 +61,10 @@ app.get("/apidb", (req, res) => {
 
         client.connect();
 
-        await client.query('DROP TABLE IF EXISTS "times";');
-        await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
+        //await
+        client.query('DROP TABLE IF EXISTS "times";');
+        //await
+        client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
 
         var sql = "INSERT INTO times(snow, hr, min) VALUES('0-3', $1, $2), ('4-7', $3, $4), ('8-11', $5, $6), ('11+', $7, $8);";
 

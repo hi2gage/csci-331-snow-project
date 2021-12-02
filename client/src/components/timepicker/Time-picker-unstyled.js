@@ -1,26 +1,25 @@
 import '../../App.css';
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import axios from 'axios';
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import Button from "@mui/material/Button";
 
 // Converts the number into a string
 function toStringNum(time) {
     var hour, minute = '0';
     if (time.hr < 10) {
         hour = '0' + time.hr.toString()
-    }
-    else {
+    } else {
         hour = time.hr.toString()
     }
     if (time.min < 10) {
         minute = '0' + time.min.toString()
-    }
-    else {
+    } else {
         minute = time.min.toString()
     }
-    return { snow: time.snow, hour: hour, minute: minute };
+    return {snow: time.snow, hour: hour, minute: minute};
 }
 
 // converts all amounts to strings
@@ -36,7 +35,7 @@ function toStringArray(data) {
 function toIntNum(time) {
     var hour = parseInt(time.hour)
     var minute = parseInt(time.minute)
-    return { hour: hour, minute: minute };
+    return {hour: hour, minute: minute};
 }
 
 // converts all strings to numbers
@@ -55,8 +54,8 @@ function toIntArray(data) {
 
 // Returns the content for each individual snow levels. State, UseState function passed in
 // TODO: Still needs formating, if content needs to change please let me know
-function Picker({ state, setSnow, index }) {
-    
+function Picker({state, setSnow, index}) {
+
     // Ensures that the webpage isn't refreshed everytime the data changes
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -80,12 +79,12 @@ function Picker({ state, setSnow, index }) {
 
     return (
         <form className="time-picker"
-            onSubmit={handleSubmit}>
+              onSubmit={handleSubmit}>
 
             {/* TODO: Format Snow Range */}
-                <div className="snowRange">
-                    <label className=" ">{state[index].snow}</label>
-                </div>
+            <div className="snowRange">
+                <label className="snowRangeLabel">{state[index].snow}</label>
+            </div>
 
             {/* TODO: Format the hour selector */}
             <FormControl variant="standard">
@@ -96,6 +95,7 @@ function Picker({ state, setSnow, index }) {
                         defaultValue={state[index].hour}
                         onChange={e => updateHour(e)}
                         className="hourSelect"
+                        sx={{ width: 200, height: 100 }}
                     >
                         <MenuItem value="00">00</MenuItem>
                         <MenuItem value="01">01</MenuItem>
@@ -118,13 +118,14 @@ function Picker({ state, setSnow, index }) {
             {/* TODO: Format the minute selector */}
             <div class="snowRange">
                 <FormControl variant="standard">
-                    <div className="snowRange" id="hourRange">
+                    <div className="snowRange" id="minuteRange">
                         <Select
                             minute={state[index].minute}
                             value={state[index].minute}
                             defaultValue={state[index].minute}
                             onChange={e => updateMin(e)}
                             className="minuteSelect"
+                            sx={{ width: 200, height: 100 }}
                         >
                             <MenuItem value="00">00</MenuItem>
                             <MenuItem value="05">05</MenuItem>
@@ -147,7 +148,6 @@ function Picker({ state, setSnow, index }) {
 }
 
 
-
 function Timepicker(props) {
 
     // Keeps track of state and entire array of different snow levels
@@ -158,6 +158,7 @@ function Timepicker(props) {
 
     // POST method to push the current state of the selectors back to the server
     const postToApi = () => {
+        console.log("submitted data");
         axios.post('/apidb', toIntArray(state))
             .then(response => {
                 console.log("I just send a POST")
@@ -170,34 +171,21 @@ function Timepicker(props) {
     // Returns the view of the 4 pickers
     return (
         <>
-            <Picker state={state} setSnow={setSnow} index={0} />
-            <Picker state={state} setSnow={setSnow} index={1} />
-            <Picker state={state} setSnow={setSnow} index={2} />
-            <Picker state={state} setSnow={setSnow} index={3} />
+            <Picker state={state} setSnow={setSnow} index={0}/>
+            <Picker state={state} setSnow={setSnow} index={1}/>
+            <Picker state={state} setSnow={setSnow} index={2}/>
+            <Picker state={state} setSnow={setSnow} index={3}/>
 
 
             {/* Submits data to server*/}
             {/* TODO: Format button and rename if neccessary */}
             <div className="submitDiv">
-                <input className="submitButton"
-                    type="submit"
-                    value="Submit to Server"
-                    form="time-picker"
-                    onClick={e => postToApi()}
-
-                />
-                
-
-                {/* Still figuring out if this is a neccessay button */}
-                
-                {/* <input className=""
-                    type="button"
-                    value="Reset"
-                    className=""
-                    form="time-picker"
-                    // onClick={e => setSnow(toStringArray(props.data))} 
-                    onClick={e => console.log(props.data)}
-                /> */}
+                <Button
+                    className="submitButton"
+                    variant="contained"
+                    onClick={e => postToApi()}>
+                    Submit to Server
+                </Button>
             </div>
 
         </>
