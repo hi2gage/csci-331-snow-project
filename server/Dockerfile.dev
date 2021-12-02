@@ -8,12 +8,15 @@ COPY package*.json ./
 
 RUN npm install
 
-# Copying rest of the application to app directory
+# Copying rest of the 
+# application to app directory
 COPY . /server
 
-# Expose the port and start the application
+# Expose the port and start 
+# the application
 EXPOSE $PORT
 
 ENV LOCAL_OR_HEROKU: local
 
 CMD ["npm", "run", "dev"]
+
