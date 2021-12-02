@@ -15,7 +15,6 @@ async function scrap() {
             let firstCol = ($('#post-13 > div > div:nth-child(1) > div.col-sm-9 > div > div:nth-child(1)').html().split("<br>"))
             let secondCol = ($('#post-13 > div > div:nth-child(1) > div.col-sm-9 > div > div:nth-child(2)').html().split("<br>"))
 
-
             var snowReport = []
             let j = 0;
             firstCol.forEach(function (i, e) {
@@ -28,9 +27,7 @@ async function scrap() {
                 j++
             })
 
-
-
-            var obj = {}
+            var obj = {'date_time': new Date().toLocaleString("en-US", { timeZone: "Pacific/Chatham" })}
             snowReport.forEach(function (item, index) {
                 var res = item.split(':').map(x => x.trim())
                 console.log(res)

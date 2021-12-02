@@ -17,9 +17,7 @@ async function getAll() {
         const client = new Client(credentials);
         await client.connect();
         const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
-        // for (let row of now.rows) {
-        //     console.log(JSON.stringify(row));
-        // }
+
         await client.end();
 
         return now;
@@ -103,9 +101,13 @@ async function setupDb() {
         const client = new Client(credentials);
         await client.connect();
 
+        // Adding times table and adding data
         await client.query('DROP TABLE IF EXISTS "times";');
         await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
+        client.query("INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
 
+
+        // Creating users table and adding new user
         await client.query('DROP TABLE IF EXISTS "users";');
         await client.query('CREATE TABLE users (id serial PRIMARY KEY, ' +
             'first VARCHAR(25), ' +
@@ -116,12 +118,35 @@ async function setupDb() {
         const salt = await bcrypt.genSalt(10);
         const pass = await bcrypt.hash("pass", salt);
 
-
         let sql = "INSERT INTO users (first, last, email, password) VALUES ('gage', 'halverson', 'gage@halverson.com', $1);"
         client.query(sql, [pass]);
 
 
-        client.query("INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
+        await client.query('DROP TABLE IF EXISTS "snowfall_wf";');
+        await client.query('CREATE TABLE snowfall_wf (id serial PRIMARY KEY, ' +
+            'date_time VARCHAR(50),' +
+            'Overnight_Snow_in INT, ' +
+            'Settled_Base_in INT, ' +
+            'Total_to_Date_in INT, ' +
+            'six_am_Temp_F INT, ' +
+            'twentyfour_hr_Snow_in INT, ' +
+            'seven_Day_Snow_in INT, ' +
+            'Current_Conditions VARCHAR(25),' +
+            'Visibility_Wind VARCHAR(25));'
+        );
+        client.query("INSERT INTO snowfall_WF (date_time, " +
+            "Overnight_Snow_in, " +
+            "Settled_Base_in, " +
+            "Total_to_Date_in, " +
+            "six_am_Temp_F, " +
+            "twentyfour_hr_Snow_in, " +
+            "seven_Day_Snow_in, " +
+            "Current_Conditions, " +
+            "Visibility_Wind)" +
+
+            "VALUES('12/2/2021, 9:37:59 PM', 1,  20, 26, 27, 1, 10, 'Cloud', 'Low/SW at 19mph');");
+
+
         const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
 
         client.end()
@@ -140,9 +165,13 @@ async function setupDb() {
 
         await client.connect();
 
+        // Adding times table and adding data
         await client.query('DROP TABLE IF EXISTS "times";');
         await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
+        client.query("INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
 
+
+        // Creating users table and adding new user
         await client.query('DROP TABLE IF EXISTS "users";');
         await client.query('CREATE TABLE users (id serial PRIMARY KEY, ' +
             'first VARCHAR(25), ' +
@@ -153,12 +182,35 @@ async function setupDb() {
         const salt = await bcrypt.genSalt(10);
         const pass = await bcrypt.hash("pass", salt);
 
-
         let sql = "INSERT INTO users (first, last, email, password) VALUES ('gage', 'halverson', 'gage@halverson.com', $1);"
         client.query(sql, [pass]);
 
 
-        client.query("INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
+        await client.query('DROP TABLE IF EXISTS "snowfall_wf";');
+        await client.query('CREATE TABLE snowfall_wf (id serial PRIMARY KEY, ' +
+            'date_time VARCHAR(50),' +
+            'Overnight_Snow_in INT, ' +
+            'Settled_Base_in INT, ' +
+            'Total_to_Date_in INT, ' +
+            'six_am_Temp_F INT, ' +
+            'twentyfour_hr_Snow_in INT, ' +
+            'seven_Day_Snow_in INT, ' +
+            'Current_Conditions VARCHAR(25),' +
+            'Visibility_Wind VARCHAR(25));'
+        );
+        client.query("INSERT INTO snowfall_WF (date_time, " +
+            "Overnight_Snow_in, " +
+            "Settled_Base_in, " +
+            "Total_to_Date_in, " +
+            "six_am_Temp_F, " +
+            "twentyfour_hr_Snow_in, " +
+            "seven_Day_Snow_in, " +
+            "Current_Conditions, " +
+            "Visibility_Wind)" +
+
+            "VALUES('12/2/2021, 9:37:59 PM', 1,  20, 26, 27, 1, 10, 'Cloud', 'Low/SW at 19mph');");
+
+
         const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
 
         client.end()
