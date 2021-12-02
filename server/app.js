@@ -28,7 +28,7 @@ app.use(express.json());
 
 //Define request response in root URL (/)
 app.get("/", function (req, res) {
-    res.send(process.env.LOCAL_OR_HEROKU);
+    res.send(process.env.DATABASE_URL);
 });
 
 
@@ -40,69 +40,20 @@ app.get("/api", (req, res) => {
 
 
 
-// Getter
+// Gets all of the times from the database
 app.get("/apidb", (req, res) => {
+    dbAcess.getAll().then((data) => {
+        res.send(data.rows);
 
-    if (process.env.LOCAL_OR_HEROKU == "local") {
-        dbAcess.getAll().then((data) => {
-            // console.log(JSON.stringify(data.rows, null, "  "))
-            res.send(data.rows);
-
-        });
-
-    } else {
-        console.log("We are on Heroku");
-        const client = new Client({
-            connectionString: process.env.DATABASE_URL,
-            ssl: {
-                rejectUnauthorized: false,
-            },
-        });
-
-        client.connect();
-
-        await client.query('DROP TABLE IF EXISTS "times";');
-        await client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
-
-        var sql = "INSERT INTO times(snow, hr, min) VALUES('0-3', $1, $2), ('4-7', $3, $4), ('8-11', $5, $6), ('11+', $7, $8);";
-
-        const now = client.query("SELECT * FROM times ORDER BY id ASC;");
-        client.end();
-        res.send(JSON.stringify(now, null, "  "));
-    }
+    });
 });
 
 // Poster
 app.post("/apidb", (req, res) => {
-    console.log(req.body);
-    if (process.env.LOCAL_OR_HEROKU == "local") {
-        dbAcess.setAll(req.body).then((data) => {
-
-
-            console.log(req.body);
-            // res.send(data.rows);
-            res.send(data.rows);
-        });
-
-    } else {
-        console.log("We are on Heroku");
-        const client = new Client({
-            connectionString: process.env.DATABASE_URL,
-            ssl: {
-                rejectUnauthorized: false,
-            },
-        });
-
-        client.connect();
-
-        client.query('DROP TABLE IF EXISTS "times";');
-        client.query('CREATE TABLE times (id serial PRIMARY KEY, snow VARCHAR(25), hr INT, min INT);');
-
-        client.query("INSERT INTO times (snow, hr, min) VALUES('0-3', 7, 30), ('4-7', 7, 00), ('8-11', 6, 30), ('11+', 6, 00);");
-
-        client.end();
-        res.send("testing");
-    }
+    dbAcess.setAll(req.body).then((data) => {
+        console.log(req.body);
+        res.send(data.rows);
+    });
 });
 
 

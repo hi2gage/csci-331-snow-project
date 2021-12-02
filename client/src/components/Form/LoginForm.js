@@ -5,7 +5,7 @@ import './LoginForm.css'
 import PropTypes from 'prop-types';
 
 async function loginUser(credentials) {
-    return fetch('/login', {
+    return fetch('https://csci-331-snow-project.herokuapp.com/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
