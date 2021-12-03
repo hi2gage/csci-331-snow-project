@@ -1,3 +1,6 @@
+# Presentation:
+[Presentation link](https://docs.google.com/presentation/d/1J_xvRwUJ-h8E2FZkwmR7bhthAn2YrtyF_NdMj210m5c/edit?usp=sharing)
+
 # csci-331-snow-project
 Requirements:
 - Install Docker
