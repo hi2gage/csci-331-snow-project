@@ -15,12 +15,6 @@ function Cards() {
               label='Whitefish'
               path='/services'
             />
-            {/* <CardItem
-              src='images/bridger-ski.jpg'
-              text='Pick a time for powder at Bridger'
-              label='Bridger Bowl'
-              path='/services'
-            /> */}
           </ul>
         </div>
       </div>
