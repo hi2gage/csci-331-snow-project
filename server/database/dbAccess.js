@@ -17,9 +17,9 @@ async function getAll() {
         const client = new Client(credentials);
         await client.connect();
         const now = await client.query("SELECT * FROM times ORDER BY id ASC;");
-        for (let row of now.rows) {
-            console.log(JSON.stringify(row));
-        }
+        // for (let row of now.rows) {
+        //     console.log(JSON.stringify(row));
+        // }
         await client.end();
 
         return now;
