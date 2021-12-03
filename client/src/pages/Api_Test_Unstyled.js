@@ -6,6 +6,7 @@ import axios from 'axios';
 import Timepicker from '../components/timepicker/Time-picker-unstyled'
 import "../components/timepicker/timePicker.css"
 import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 
 
 // function toStringNum(time) {
@@ -87,34 +88,35 @@ function Api_Test() {
 
     return (
         <div className="timePickerPage">
-        <div className="timePickerDiv">
-            <Paper elevation={3}>
-            <div className="timePickerComponent">{(data == null) ? 'not loaded' :
-                <>
-                    <div id="tableLabels">
-                        <label className="snowLabel">Snow</label>
-                        <label className="hourLabel">Hour</label>
-                        <label className="minuteLabel">Minute</label>
+            <div className="timePickerDiv">
+                <Paper id="paper" elevation={3}>
+                    <div className="timePickerComponent">{(data == null) ? 'not loaded' :
+                        <>
+                            <div id="tableLabels">
+                                <label className="snowLabel">Snow</label>
+                                <label className="hourLabel">Hour</label>
+                                <label className="minuteLabel">Minute</label>
+                            </div>
+                            <Timepicker
+                                hour={data[0].hr}
+                                minute={data[0].min}
+                                snow={data[0].snow}
+                                data={data}/>
+                        </>}
                     </div>
-                    <Timepicker
-                        hour={data[0].hr}
-                        minute={data[0].min}
-                        snow={data[0].snow}
-                        data={data}/>
-                </>}
-            </div>
 
-            {/* This Button pulls the data from server */}
-            {/* TODO: Format the button try to keep the button inside the div if possible rename is nessesary*/}
-            <div className="resetDiv">
-                <input className="resetButton"
-                       type="button"
-                       value="Reset from Server"
-                       form="time-picker"
-                       onClick={e => getFromApi()}/>
+                    {/* This Button pulls the data from server */}
+                    {/* TODO: Format the button try to keep the button inside the div if possible rename is nessesary*/}
+                    <div className="resetDiv">
+                        <Button
+                            className="resetButton"
+                            variant="contained"
+                            onClick={e => getFromApi()}>
+                            Reset from Server
+                        </Button>
+                    </div>
+                </Paper>
             </div>
-            </Paper>
-        </div>
         </div>
     )
 }

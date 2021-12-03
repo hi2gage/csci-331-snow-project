@@ -4,23 +4,22 @@ import axios from 'axios';
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import Button from "@mui/material/Button";
 
 // Converts the number into a string
 function toStringNum(time) {
     var hour, minute = '0';
     if (time.hr < 10) {
         hour = '0' + time.hr.toString()
-    }
-    else {
+    } else {
         hour = time.hr.toString()
     }
     if (time.min < 10) {
         minute = '0' + time.min.toString()
-    }
-    else {
+    } else {
         minute = time.min.toString()
     }
-    return { snow: time.snow, hour: hour, minute: minute };
+    return {snow: time.snow, hour: hour, minute: minute};
 }
 
 // converts all amounts to strings
@@ -83,9 +82,9 @@ function Picker({ state, setSnow, index }) {
             onSubmit={handleSubmit}>
 
             {/* TODO: Format Snow Range */}
-                <div className="snowRange">
-                    <label className=" ">{state[index].snow}</label>
-                </div>
+            <div className="snowRange">
+                <label className="snowRangeLabel">{state[index].snow}</label>
+            </div>
 
             {/* TODO: Format the hour selector */}
             <FormControl variant="standard">
@@ -96,6 +95,7 @@ function Picker({ state, setSnow, index }) {
                         defaultValue={state[index].hour}
                         onChange={e => updateHour(e)}
                         className="hourSelect"
+                        sx={{ width: 200, height: 100 }}
                     >
                         <MenuItem value="00">00</MenuItem>
                         <MenuItem value="01">01</MenuItem>
@@ -118,13 +118,14 @@ function Picker({ state, setSnow, index }) {
             {/* TODO: Format the minute selector */}
             <div class="snowRange">
                 <FormControl variant="standard">
-                    <div className="snowRange" id="hourRange">
+                    <div className="snowRange" id="minuteRange">
                         <Select
                             minute={state[index].minute}
                             value={state[index].minute}
                             defaultValue={state[index].minute}
                             onChange={e => updateMin(e)}
                             className="minuteSelect"
+                            sx={{ width: 200, height: 100 }}
                         >
                             <MenuItem value="00">00</MenuItem>
                             <MenuItem value="05">05</MenuItem>
@@ -179,25 +180,12 @@ function Timepicker(props) {
             {/* Submits data to server*/}
             {/* TODO: Format button and rename if neccessary */}
             <div className="submitDiv">
-                <input className="submitButton"
-                    type="submit"
-                    value="Submit to Server"
-                    form="time-picker"
-                    onClick={e => postToApi()}
-
-                />
-                
-
-                {/* Still figuring out if this is a neccessay button */}
-                
-                {/* <input className=""
-                    type="button"
-                    value="Reset"
-                    className=""
-                    form="time-picker"
-                    // onClick={e => setSnow(toStringArray(props.data))} 
-                    onClick={e => console.log(props.data)}
-                /> */}
+                <Button
+                    className="submitButton"
+                    variant="contained"
+                    onClick={e => postToApi()}>
+                    Submit to Server
+                </Button>
             </div>
 
         </>
