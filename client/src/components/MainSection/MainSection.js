@@ -1,15 +1,15 @@
 import React from 'react'
 import { Button } from '../Button/Button'
 import '../../App.css'
-import './HeroSection.css'
+import './MainSection.css'
 
-function HeroSection() {
+function MainSection() {
     return (
-        <div className='hero-container'>
+        <div className='main-container'>
             <video src="/videos/snowvid.mp4" autoPlay loop muted />
             <h1>SHREDDING POW</h1>
             <p>Start your alarm clock adventure</p>
-            <div className='hero-btns'>
+            <div className='main-btns'>
                 <Button className='btns' buttonStyle='btn--outline' buttonSize='btn--large'>GET STARTED</Button>
                 {/* <Button className='btns' buttonStyle='btn--primary' buttonSize='btn--large'>Watch A Dope Vid <i className='far fa-play-circle' /></Button> */}
             </div>
@@ -17,4 +17,4 @@ function HeroSection() {
     )
 }
 
-export default HeroSection
+export default MainSection
