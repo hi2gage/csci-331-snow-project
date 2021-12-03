@@ -1,16 +1,16 @@
 POST  http://localhost:5000/apidb HTTP/1.1
 content-type: application/json
 
-# [ 7, 45, 7, 0, 6, 30, 6, 0 ]
 [ 1, 0, 2, 10, 3, 20, 4, 30 ]
 ###
 
-
+# Gets all times from database
 GET   http://localhost:5000/apidb HTTP/1.1
 content-type: application/json
 
 ###
 
+# Sets up new database from scratch
 GET  http://localhost:5000/setup HTTP/1.1
 content-type: application/json
 
@@ -20,16 +20,16 @@ content-type: application/json
 POST  http://localhost:5000/login HTTP/1.1
 content-type: application/json
 
-{ "email": "gage@halverson.com", 
-"password": "pass" }
+{ "email": "gage", 
+"password": "pass1" }
 ###
 
 ### Incorrect Username and Pass
 POST  http://localhost:5000/login HTTP/1.1
 content-type: application/json
 
-{ "email": "gage1", 
-"password": "pass1" }
+{ "email": "gage", 
+"password": "pass111" }
 ###
 
 
@@ -40,6 +40,6 @@ content-type: application/json
 
 { "first": "gage",
 "last": "halverson",
-"email": "gage", 
+"email": "gage11", 
 "password": "pass" }
 ###

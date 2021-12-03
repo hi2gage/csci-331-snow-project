@@ -40,7 +40,6 @@ async function createUser(userInfo) {
         console.log(values)
         let user = await client.query(sql, values);
         await client.end();
-        console.log(user.rows)
     }
     else {
         console.log("Creating new user on Heroku");
@@ -63,7 +62,6 @@ async function createUser(userInfo) {
         console.log(values)
         let user = await client.query(sql, values);
         await client.end();
-        console.log(user.rows)
     }
 
 
@@ -82,10 +80,7 @@ async function getUser(email) {
         var sql = "SELECT * FROM users WHERE email = ANY ($1) ORDER BY id ASC;";
         const user = await client.query(sql, [[email]]);
         await client.end();
-        console.log(user.rows)
         return user.rows;
-
-        // TODO: Need to figure this out for connecting to the database for HEROKU
     }
     else {
         console.log("Getting user by email on Heroku");
@@ -98,16 +93,11 @@ async function getUser(email) {
 
         await client.connect();
 
-        console.log(email)
         var sql = "SELECT * FROM users WHERE email = ANY ($1) ORDER BY id ASC;";
         const user = await client.query(sql, [[email]]);
         await client.end();
-        console.log(user.rows)
         return user.rows;
-
     }
-
-
 }
 
 

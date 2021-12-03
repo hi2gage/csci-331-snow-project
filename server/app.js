@@ -70,9 +70,6 @@ app.get("/setup", (req, res) => {
 });
 
 app.use('/login', (req, res) => {
-    console.log(req.body)
-    console.log("-------------")
-
     let checker = auth.checkAuth(req.body)
     checker.then(result => {
         if (result) {
@@ -103,7 +100,7 @@ app.use('/register', (req, res) => {
         }
         else {
             res.status(400).json({
-                error: "User already registered with that email",
+                error: "Incorrect Login",
             });
         }
     })

@@ -14,18 +14,19 @@ async function checkAuth(body) {
         let userGetter = getUser(body.email)
         userGetter.then(function (user) {
             if (user.length === 0) {
-                console.log("Invalid credintals")
                 resolve(false)
             }
             else {
                 const validPassword = bcrypt.compare(body.password, user[0].password);
-                if (validPassword) {
-                    console.log("Correct login")
-                    resolve(true)
-                }
-                else {
-                    resolve(false)
-                }
+                validPassword.then((returnValue) => {
+                    if (returnValue) {
+                        resolve(true)
+                    }
+                    else {
+                        resolve(false)
+                    }
+                })
+
             }
         })
     })
@@ -37,14 +38,12 @@ async function getUser(email) {
         const client = new Client(credentials);
         await client.connect();
 
-        console.log(email)
         var sql = "SELECT * FROM users WHERE email = ANY ($1) ORDER BY id ASC;";
         const user = await client.query(sql, [[email]]);
         await client.end();
-        console.log(user.rows)
         return user.rows;
 
-    // TODO: Need to figure this out for connecting to the database for HEROKU
+        // TODO: Need to figure this out for connecting to the database for HEROKU
     } else {
         console.log("Getting user by email on Heroku");
         const client = new Client({
@@ -55,12 +54,9 @@ async function getUser(email) {
         });
 
         await client.connect();
-
-        console.log(email)
         var sql = "SELECT * FROM users WHERE email = ANY ($1) ORDER BY id ASC;";
         const user = await client.query(sql, [[email]]);
         await client.end();
-        console.log(user.rows)
         return user.rows;
 
     }

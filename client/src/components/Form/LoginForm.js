@@ -32,9 +32,6 @@ function LoginForm({ Login, error, setToken }) {
         window.location.reload(false);
     }
 
-
-
-
     return (
         <div>
             <form id="loginform" onSubmit={submitHandler}>
