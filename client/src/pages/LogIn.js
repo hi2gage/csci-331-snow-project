@@ -15,28 +15,7 @@ function getToken() {
 export default function LogIn() {
     const token = getToken();
 
-
-    const adminUser = {
-        email: "kerr@gmail.com",
-        password: "kerr123"
-    }
-
-    const [user, setUser] = useState({ name: "", email: "" });
     const [error, setError] = useState("");
-
-    // const Login = details => {
-    //     console.log(details);
-    //     if (details.email == adminUser.email && details.password == adminUser.password) {
-    //         console.log("Logged IN");
-    //         setUser({
-    //             name: details.name,
-    //             email: details.email
-    //         });
-    //     } else {
-    //         console.log("Details do not match");
-    //         setError("Details do not match!");
-    //     }
-    // }
 
     const Logout = () => {
         console.log("Logout");

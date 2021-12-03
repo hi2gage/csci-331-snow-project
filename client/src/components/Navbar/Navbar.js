@@ -25,7 +25,7 @@ function Navbar({ userStatus }) {
     const Logout = () => {
         console.log("Logout");
         sessionStorage.clear()
-        // window.location.reload(false);
+        window.location.reload(false);
     }
 
     useEffect(() => {

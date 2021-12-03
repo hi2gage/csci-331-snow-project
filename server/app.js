@@ -92,19 +92,22 @@ app.use('/login', (req, res) => {
 app.use('/register', (req, res) => {
     console.log(req.body)
 
-    let register = reg.register(req.body)
-
-    if (req.body.email === 'gage' && req.body.password === 'pass') {
-        console.log("correct password and username")
-        res.send({
-            result: "Success"
-        });
-    }
-    else {
-        res.send({
-            error: "Failure"
-        });
-    }
+    let registerStatus = reg.register(req.body)
+    console.log("Status on App " + registerStatus)
+    registerStatus.then((result) => {
+        if (result) {
+            console.log("correct password and username")
+            res.send({
+                result: "Success"
+            });
+        }
+        else {
+            res.status(400).json({
+                error: "User already registered with that email",
+            });
+        }
+    })
+    
 });
 
 
@@ -139,9 +142,9 @@ app.get("/alarm", (req, res) => {
         dbAcess.getAll(req.body).then((times) => {
             console.log(times.rows);
 
-            res.send({times: times.rows, snow: snow.rows});
+            res.send({ times: times.rows, snow: snow.rows });
         });
-        
+
     });
 });
 

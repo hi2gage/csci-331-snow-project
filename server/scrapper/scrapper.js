@@ -27,7 +27,7 @@ async function scrap() {
                 j++
             })
 
-            var obj = {'date_time': new Date().toLocaleString("en-US", { timeZone: "America/Denver" })}
+            var obj = { 'date_time': new Date().toLocaleString("en-US", { timeZone: "America/Denver" }) }
             snowReport.forEach(function (item, index) {
                 var res = item.split(':').map(x => x.trim())
                 console.log(res)

@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Paper } from "@mui/material";
 import Link from "@mui/material/Link";
 import './LoginForm.css'
-import PropTypes from 'prop-types';
 
+// https://csci-331-snow-project.herokuapp.com
 async function loginUser(credentials) {
-    return fetch('https://csci-331-snow-project.herokuapp.com/login', {
+    return fetch('/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -19,7 +19,6 @@ async function loginUser(credentials) {
 
 function LoginForm({ Login, error, setToken }) {
 
-    const [details, setDetails] = useState({ name: "", email: "", password: "" });
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
@@ -31,8 +30,6 @@ function LoginForm({ Login, error, setToken }) {
         });
         setToken(token);
         window.location.reload(false);
-
-        Login(details);
     }
 
 

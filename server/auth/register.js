@@ -19,17 +19,13 @@ async function register(body) {
             }
             else {
                 createUser(body)
+                resolve(true)
             }
         })
-
-
-
-
     })
 }
 
 async function createUser(userInfo) {
-
     if (process.env.LOCAL_OR_HEROKU == "local") {
         console.log("Creating new user locally");
         const client = new Client(credentials);
