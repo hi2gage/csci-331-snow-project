@@ -70,7 +70,7 @@ function Footer() {
                     SNOW <i class="fas fa-snowflake"></i>
             </Link>
           </div>
-          <small class='website-rights'>SNOW © 2020</small>
+          <small class='website-rights'>SNOW © 2021</small>
           <div class='social-icons'>
             <Link
               class='social-icon-link facebook'
