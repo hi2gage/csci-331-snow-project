@@ -53,7 +53,6 @@ function toIntArray(data) {
 
 
 // Returns the content for each individual snow levels. State, UseState function passed in
-// TODO: Still needs formating, if content needs to change please let me know
 function Picker({ state, setSnow, index }) {
     
     // Ensures that the webpage isn't refreshed everytime the data changes
@@ -62,7 +61,6 @@ function Picker({ state, setSnow, index }) {
     };
 
     // Solves the indexing problem when changing state of variables
-    // TODO: Move this into another file for better readibility
     const updateHour = (e) => {
         const hour = [...state];
         hour[index].hour = e.target.value;
@@ -70,7 +68,6 @@ function Picker({ state, setSnow, index }) {
     }
 
     // Solves the indexing problem when changing state of variables
-    // TODO: Move this into another file for better readibility
     const updateMin = (e) => {
         const min = [...state];
         min[index].minute = e.target.value;
@@ -80,13 +77,9 @@ function Picker({ state, setSnow, index }) {
     return (
         <form className="time-picker"
             onSubmit={handleSubmit}>
-
-            {/* TODO: Format Snow Range */}
             <div className="snowRange">
                 <label className="snowRangeLabel">{state[index].snow}</label>
             </div>
-
-            {/* TODO: Format the hour selector */}
             <FormControl variant="standard">
                 <div className="snowRange" id="hourRange">
                     <Select
@@ -113,9 +106,6 @@ function Picker({ state, setSnow, index }) {
                     </Select>
                 </div>
             </FormControl>
-
-
-            {/* TODO: Format the minute selector */}
             <div class="snowRange">
                 <FormControl variant="standard">
                     <div className="snowRange" id="minuteRange">
@@ -178,7 +168,6 @@ function Timepicker(props) {
 
 
             {/* Submits data to server*/}
-            {/* TODO: Format button and rename if neccessary */}
             <div className="submitDiv">
                 <Button
                     className="submitButton"
@@ -187,9 +176,7 @@ function Timepicker(props) {
                     Submit to Server
                 </Button>
             </div>
-
         </>
-
     );
 }
 
