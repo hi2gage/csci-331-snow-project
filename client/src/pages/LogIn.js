@@ -24,14 +24,8 @@ export default function LogIn() {
     }
 
     return (
-        <div className='login'>
-            {(token) ? (
-                <div className="welcome">
-                    <h2>Welcome to the website!</h2>
-                </div>
-            ) : (
-                <LoginForm setToken={setToken} error={error} />
-            )}
+        <div className='sign-in'>
+            <LoginForm setToken={setToken} error={error} />
         </div>
     );
 }

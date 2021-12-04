@@ -10,7 +10,7 @@ function Home(loggedinStatus){
     return(
         <>
          <MainSection/>
-         <Cards userStatus={loggedinStatus}/>
+         <Cards />
          <Footer/>
         </>
 
