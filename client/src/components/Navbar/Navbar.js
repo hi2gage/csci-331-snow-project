@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '../Button/Button';
 import './Navbar.css';
+import { useHistory } from 'react-router';
+
 function Navbar({ userStatus }) {
-    
+    let history = useHistory();
+
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
@@ -22,6 +25,7 @@ function Navbar({ userStatus }) {
     const Logout = () => {
         console.log("Logout");
         sessionStorage.clear()
+        history.push('/')
         window.location.reload(false);
     }
 

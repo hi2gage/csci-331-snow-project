@@ -32,13 +32,17 @@ function App() {
                 <Navbar userStatus={(token)} />
                 <Switch>
                     <Route path='/' exact component={Home} />
+                    {/* <Route
+                        path='/'
+                        render={() => (
+                            <Home loggedinStatus={false} />
+                        )
+                    } /> */}
                     <Route path='/login' component={LogIn} />
                     
                     {/* Allowing access to api Page */}
                     {token ?
                         (<Route path='/api' component={Api_Test_Unstyled} />) : (null)}
-
-                    
                     <Route
                         path='/sign-up'
                         render={() => (

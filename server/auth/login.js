@@ -10,6 +10,8 @@ const credentials = {
 };
 
 async function checkAuth(body) {
+    console.log("checking the username")
+
     return new Promise(function (resolve, reject) {
         let userGetter = getUser(body.email)
         userGetter.then(function (user) {
@@ -18,6 +20,7 @@ async function checkAuth(body) {
             }
             else {
                 const validPassword = bcrypt.compare(body.password, user[0].password);
+                console.log(body.password)
                 validPassword.then((returnValue) => {
                     if (returnValue) {
                         resolve(true)
@@ -33,6 +36,7 @@ async function checkAuth(body) {
 }
 
 async function getUser(email) {
+    console.log(email)
     if (process.env.LOCAL_OR_HEROKU == "local") {
         console.log("Getting user by email locally");
         const client = new Client(credentials);
@@ -41,6 +45,7 @@ async function getUser(email) {
         var sql = "SELECT * FROM users WHERE email = ANY ($1) ORDER BY id ASC;";
         const user = await client.query(sql, [[email]]);
         await client.end();
+        console.log(user.rows)
         return user.rows;
 
         // TODO: Need to figure this out for connecting to the database for HEROKU

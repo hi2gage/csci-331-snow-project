@@ -21,15 +21,15 @@ POST  http://localhost:5000/login HTTP/1.1
 content-type: application/json
 
 { "email": "gage", 
-"password": "pass1" }
+"password": "pass" }
 ###
 
 ### Incorrect Username and Pass
 POST  http://localhost:5000/login HTTP/1.1
 content-type: application/json
 
-{ "email": "gage", 
-"password": "pass111" }
+{ "email": "gage11", 
+"password": "pass" }
 ###
 
 
@@ -40,6 +40,6 @@ content-type: application/json
 
 { "first": "gage",
 "last": "halverson",
-"email": "gage11", 
+"email": "gage", 
 "password": "pass" }
 ###
