@@ -29,7 +29,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    font-size: 40px !important;
+    font-size: 35px !important;
+    height: 80px;
 }
 
 .snowRange {
@@ -43,7 +44,7 @@ body {
 #tableLabels {
     display: flex;
     justify-content: space-evenly;
-    font-size: 75px;
+    font-size: 55px;
 }
 
 .submitDiv {
@@ -63,8 +64,8 @@ body {
 }
 
 .timePickerDiv {
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 25%;
+    padding-right: 25%;
     padding-top: 5%;
 }
 
