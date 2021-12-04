@@ -88,7 +88,7 @@ function Picker({ state, setSnow, index }) {
                         defaultValue={state[index].hour}
                         onChange={e => updateHour(e)}
                         className="hourSelect"
-                        sx={{ width: 200, height: 100 }}
+                        sx={{ width: 150, height: 60 }}
                     >
                         <MenuItem value="00">00</MenuItem>
                         <MenuItem value="01">01</MenuItem>
@@ -115,7 +115,7 @@ function Picker({ state, setSnow, index }) {
                             defaultValue={state[index].minute}
                             onChange={e => updateMin(e)}
                             className="minuteSelect"
-                            sx={{ width: 200, height: 100 }}
+                            sx={{ width: 150, height: 60 }}
                         >
                             <MenuItem value="00">00</MenuItem>
                             <MenuItem value="05">05</MenuItem>
