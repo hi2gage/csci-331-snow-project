@@ -19,7 +19,7 @@ function toStringNum(time) {
     } else {
         minute = time.min.toString()
     }
-    return {snow: time.snow, hour: hour, minute: minute};
+    return { snow: time.snow, hour: hour, minute: minute };
 }
 
 // converts all amounts to strings
@@ -54,7 +54,7 @@ function toIntArray(data) {
 
 // Returns the content for each individual snow levels. State, UseState function passed in
 function Picker({ state, setSnow, index }) {
-    
+
     // Ensures that the webpage isn't refreshed everytime the data changes
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -149,7 +149,9 @@ function Timepicker(props) {
 
     // POST method to push the current state of the selectors back to the server
     const postToApi = () => {
-        axios.post('https://csci-331-snow-project.herokuapp.com/apidb', toIntArray(state))
+        const deployURL = 'https://csci-331-snow-project.herokuapp.com/apidb'
+        const localURL = '/apidb'
+        axios.post(localURL, toIntArray(state))
             .then(response => {
                 console.log("I just send a POST")
                 const info = response;

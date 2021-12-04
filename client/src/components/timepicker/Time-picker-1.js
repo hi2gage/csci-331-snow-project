@@ -141,8 +141,10 @@ function Timepicker(props) {
     useEffect(() => setSnow(toStringArray(props.data)), [props.data]);
 
     // Pushing all of the data in the form back to the server
+    const deployURL ='https://csci-331-snow-project.herokuapp.com/apidb'
+    const localURL = '/apidb'
     const postToApi = () => {
-        axios.post('/apidb', toIntArray(state))
+        axios.post(localURL, toIntArray(state))
             .then(response => {
                 console.log("I just send a POST")
                 const info = response;

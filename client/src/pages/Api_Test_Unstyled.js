@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 // import '../../App.css';
 import '../index.css';
 import axios from 'axios';
@@ -12,7 +12,9 @@ function Api_Test() {
     const [data, setData] = useState();
 
     const getFromApi = () => {
-        axios.get('https://csci-331-snow-project.herokuapp.com/apidb')
+        const deployURL = 'https://csci-331-snow-project.herokuapp.com/apidb'
+        const localURL = '/apidb'
+        axios.get(localURL)
             .then(response => {
                 const info = response.data;
                 setData(info);
@@ -37,7 +39,7 @@ function Api_Test() {
                                 hour={data[0].hr}
                                 minute={data[0].min}
                                 snow={data[0].snow}
-                                data={data}/>
+                                data={data} />
                         </>}
                     </div>
 

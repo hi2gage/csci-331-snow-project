@@ -9,14 +9,16 @@ import Box from '@mui/material/Box';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./SignUpForm.css"
-
+import { useHistory } from 'react-router';
 
 const theme = createTheme();
 
 async function loginUser(info) {
-    return fetch('/register', {
+    const deployURL = 'https://csci-331-snow-project.herokuapp.com/register'
+    const localURL = '/register'
+    return fetch(localURL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -29,6 +31,8 @@ async function loginUser(info) {
 
 
 export default function SignUpForm() {
+    let history = useHistory();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -41,6 +45,8 @@ export default function SignUpForm() {
             password: data.get('password'),
         }
         loginUser(userInfo)
+        history.push("/login");
+        window.location.reload(false);
 
 
         console.log(userInfo);
@@ -52,7 +58,7 @@ export default function SignUpForm() {
         <>
             <ThemeProvider theme={theme}>
                 <Container id="signupForm" component="main" maxWidth="xs">
-                    <CssBaseline/>
+                    <CssBaseline />
                     <Box
                         sx={{
                             marginTop: 8,
@@ -61,13 +67,13 @@ export default function SignUpForm() {
                             alignItems: 'center',
                         }}
                     >
-                        <Avatar sx={{m: 1, bgcolor: "rgb(0 183 255)"}}>
+                        <Avatar sx={{ m: 1, bgcolor: "rgb(0 183 255)" }}>
                             <AcUnitIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
                             Sign up
                         </Typography>
-                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
+                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                             <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
@@ -116,7 +122,7 @@ export default function SignUpForm() {
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{mt: 3, mb: 2}}
+                                sx={{ mt: 3, mb: 2 }}
                             >
                                 Sign Up
                             </Button>
