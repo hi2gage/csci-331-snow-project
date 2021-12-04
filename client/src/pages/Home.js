@@ -6,11 +6,11 @@ import Footer from '../components/Footer/Footer';
 import MainSection from '../components/MainSection/MainSection';
 
 
-function Home(){
+function Home(loggedinStatus){
     return(
         <>
          <MainSection/>
-         <Cards/>
+         <Cards userStatus={loggedinStatus}/>
          <Footer/>
         </>
 
