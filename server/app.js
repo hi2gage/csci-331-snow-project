@@ -65,7 +65,7 @@ app.get("/env", (req, res) => {
 
 app.get("/setup", (req, res) => {
     dbAcess.setupDb().then((data) => {
-        res.send(JSON.stringify(data.rows, null, "  "));
+        res.send(data.rows);
     });
 });
 
