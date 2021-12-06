@@ -12,7 +12,7 @@ content-type: application/json
 POST  https://csci-331-snow-project.herokuapp.com/login HTTP/1.1
 content-type: application/json
 
-{ "email": "gage@halverson.com", 
+{ "email": "tes", 
 "password": "pass" }
 ###
 
@@ -20,8 +20,8 @@ content-type: application/json
 POST  https://csci-331-snow-project.herokuapp.com/login HTTP/1.1
 content-type: application/json
 
-{ "email": "gage1", 
-"password": "pass1" }
+{ "email": "gage.m.halverson@gmail.com", 
+"password": "password" }
 ###
 
 

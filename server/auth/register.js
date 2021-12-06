@@ -10,6 +10,7 @@ const credentials = {
 };
 
 async function register(body) {
+    console.log(body)
     return new Promise(function (resolve, reject) {
         let userGetter = getUser(body.email)
         userGetter.then(function (user) {
